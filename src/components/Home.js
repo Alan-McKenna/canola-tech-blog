@@ -1,16 +1,19 @@
 import React from 'react';
 
-const styles = {
-    container: {
-    }
-}
+import Page from './Page'
+import { home } from '../constants'
+
 
 function Home() {
     
-  return (
-    <div className="home" style={styles.container}>
-    </div>
-  );
-}
-
-export default Home;
+    return (
+      <div className="contact">
+          <Page 
+              title={home.title}
+              child={home.content}
+          />
+      </div>
+    );
+  }
+  
+  export default Home;

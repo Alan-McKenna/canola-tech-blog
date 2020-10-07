@@ -1,16 +1,19 @@
 import React from 'react';
 
-const styles = {
-    container: {
-    }
-}
+import Page from './Page'
+import { blog } from '../constants'
+
 
 function Blog() {
     
-  return (
-    <div className="blog" style={styles.container}>
-    </div>
-  );
-}
-
-export default Blog;
+    return (
+      <div className="contact">
+          <Page 
+              title={blog.title}
+              child={blog.content}
+          />
+      </div>
+    );
+  }
+  
+  export default Blog;
