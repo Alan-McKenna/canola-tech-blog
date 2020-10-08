@@ -2,7 +2,7 @@ import React from 'react';
 
 
 import BlogPostMeta from './BlogPostMeta'
-import BlogPostCategories from './BlogPostCategories'
+import BlogPostTags from './BlogPostTags'
 
 const styles = {
     container: {
@@ -10,12 +10,12 @@ const styles = {
 }
 
 
-function BlogPostSummary({ title, categories, date, summary, author }) {
+function BlogPostSummary({ title, tags, date, summary, author }) {
     
     return (
       <div className="blog-post-summary">
 
-        <BlogPostCategories categories={categories}/>
+        <BlogPostTags tags={tags}/>
         
         <div className="blog-post-title">
             {title}

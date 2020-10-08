@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { colors } from '../constants'
+import { colors, fontSize } from '../constants'
 
 const styles = {
     container: {
@@ -9,7 +9,9 @@ const styles = {
         width: '100%',
         paddingTop: 30,
         paddingBottom: 30,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: fontSize.extraLarge,
     },
     contentContainer: {
         backgroundColor: colors.beige,
@@ -34,7 +36,7 @@ function Page({ title, child }) {
         <div className="page-title" style={styles.title}>
             {title}
         </div>
-        <div className="page-content-container" style={styles.contentContainer}>
+        <div className="page-content-container">
             <div style={styles.contentContainer}>
                 {child}
             </div>

@@ -1,8 +1,11 @@
 import React from 'react';
 
+import { fontSize } from '../constants'
+
 const styles = {
     container: {
-        margin: 15
+        margin: '1vw',
+        fontSize: fontSize.large
     }
 }
 

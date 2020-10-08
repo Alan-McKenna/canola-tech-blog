@@ -2,7 +2,15 @@ import React from 'react';
 
 import Page from './Page'
 
-import { about } from '../constants'
+import { about, fontSize } from '../constants'
+
+const styles = {
+  content: {
+        fontSize: fontSize.medium,
+
+  },
+}
+
 
 function About() {
     
@@ -10,7 +18,7 @@ function About() {
     <div className="about">
         <Page 
             title={about.title}
-            child={about.content}
+            child={<span style={styles.content}>{about.content}</span>}
         />
     </div>
   );

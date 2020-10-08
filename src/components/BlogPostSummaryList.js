@@ -12,7 +12,7 @@ function BlogPostSummaryList({ posts }) {
         <BlogPostSummary
           key={index}
           title={post.title}
-          categories={post.categories}
+          tags={post.tags}
           date={post.date}
           summary={post.summary}
           author={post.author}
