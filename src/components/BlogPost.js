@@ -18,10 +18,9 @@ const styles = {
     contentContainer: {
         backgroundColor: colors.beige,
         width: '70%',
-        minHeight: '35vh',
         paddingLeft: '15%',
         paddingRight: '15%',
-        paddingTop: 20,
+        paddingTop: 30,
         paddingBottom: '6%',
         textAlign: 'center',
     },
