@@ -11,8 +11,8 @@ const styles = {
         height: '25vh',
         backgroundColor: colors.black,
         width: '100%',
-        position: 'absolute',
-        bottom: 0
+        // position: 'absolute',
+        // bottom: 0
     }
 }
 
