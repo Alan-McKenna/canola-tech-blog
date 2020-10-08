@@ -17,10 +17,10 @@ const styles = {
     },
     contentContainer: {
         backgroundColor: colors.beige,
-        width: '60%',
+        width: '70%',
         minHeight: '35vh',
-        paddingLeft: '20%',
-        paddingRight: '20%',
+        paddingLeft: '15%',
+        paddingRight: '15%',
         paddingTop: '6%',
         paddingBottom: '6%',
         textAlign: 'center',
