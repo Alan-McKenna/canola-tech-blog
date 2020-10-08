@@ -1,32 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import { useMediaQuery } from 'react-responsive'
 
 import BlogPostService from '../services/blogPost.service.js'
-import { colors, fontSize } from '../constants'
+import { colors, fontSize, device } from '../constants'
 
-const styles = {
-    container: {
-    },
-    title: {
-        width: '100%',
-        paddingTop: 30,
-        paddingBottom: 30,
-        textAlign: 'center',
-        fontWeight: 'bold',
-        fontSize: fontSize.xLarge,
-    },
-    contentContainer: {
-        backgroundColor: colors.beige,
-        width: '70%',
-        paddingLeft: '15%',
-        paddingRight: '15%',
-        paddingTop: 30,
-        paddingBottom: '6%',
-        textAlign: 'center',
-    },
-}
+
 
 function BlogPost() {
+    const isMobile = useMediaQuery({ query: `(max-width: ${device.tablet})` })
+    
+    const styles = {
+        container: {
+        },
+        title: {
+            width: '100%',
+            paddingTop: 30,
+            paddingBottom: 30,
+            textAlign: 'center',
+            fontWeight: 'bold',
+            fontSize: fontSize.xLarge,
+        },
+        contentContainer: {
+            backgroundColor: colors.beige,
+            width: (isMobile ? '90%' :'70%'),
+            paddingLeft: (isMobile ? '5%' :'15%'),
+            paddingRight: (isMobile ? '5%' :'15%'),
+            paddingTop: 30,
+            paddingBottom: '6%',
+            textAlign: 'center',
+        },
+    }
+
     const { postId, title } = useParams();
     const [ content, setContent ] = useState("");
 

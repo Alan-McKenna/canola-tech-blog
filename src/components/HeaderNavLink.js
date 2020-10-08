@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const styles = {
     container: {
         display: 'inline-block',
-        margin: 15,
+        margin: 20,
     },
     navLink: {
         textDecoration: 'none',
@@ -12,10 +12,14 @@ const styles = {
     }
 }
 
-function HeaderNavLink( { navLink }) {
+function HeaderNavLink( { navLink, setIsComponentVisible }) {
     
   return (
-    <div className="header-nav-link" style={styles.container}>
+    <div 
+        className="header-nav-link" 
+        style={styles.container} 
+        onClick={ setIsComponentVisible ? () => setIsComponentVisible(false) : undefined}
+    >
         <NavLink to={navLink.url} style={styles.navLink}>
             {navLink.name}
         </NavLink>
