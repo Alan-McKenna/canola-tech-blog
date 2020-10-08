@@ -21,7 +21,7 @@ const styles = {
         minHeight: '35vh',
         paddingLeft: '15%',
         paddingRight: '15%',
-        paddingTop: '6%',
+        paddingTop: 20,
         paddingBottom: '6%',
         textAlign: 'center',
     },

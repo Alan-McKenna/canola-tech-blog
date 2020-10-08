@@ -19,7 +19,7 @@ const styles = {
         minHeight: '35vh',
         paddingLeft: '20%',
         paddingRight: '20%',
-        paddingTop: '6%',
+        paddingTop: 20,
         paddingBottom: '6%',
         textAlign: 'center',
     },
