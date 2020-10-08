@@ -5,7 +5,7 @@ import { fontSize } from '../constants'
 const styles = {
     container: {
         margin: '1vw',
-        fontSize: fontSize.large
+        fontSize: fontSize.large,
     }
 }
 

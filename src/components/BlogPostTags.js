@@ -2,8 +2,6 @@ import React from 'react';
 
 import TagLink from './TagLink'
 
-import { colors } from '../constants'
-
 const styles = {
     container: {
     },

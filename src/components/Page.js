@@ -11,7 +11,7 @@ const styles = {
         paddingBottom: 30,
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: fontSize.extraLarge,
+        fontSize: fontSize.xxLarge,
     },
     contentContainer: {
         backgroundColor: colors.beige,

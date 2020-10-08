@@ -11,7 +11,7 @@ function BlogPostMeta({ date, author }) {
     
     return (
       <span className="blog-post-meta">
-        {date} {author}
+        By {author}, {date}
       </span>
     );
   }

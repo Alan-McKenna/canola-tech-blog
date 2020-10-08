@@ -15,7 +15,8 @@ export const colors = {
 }
 
 export const fontSize = {
-    extraLarge: '10vh',
+    xxLarge: '10vh',
+    xLarge: '5vh',
     large: '3vh',
     medium: '2vh',
     small: '1vh',
