@@ -6,7 +6,7 @@ import { about, fontSize } from '../constants'
 
 const styles = {
   content: {
-        fontSize: fontSize.medium,
+        fontSize: fontSize.medium
 
   },
 }

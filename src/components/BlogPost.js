@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 
-import { colors } from '../constants'
+import BlogPostService from '../services/blogPost.service.js'
+import { colors, fontSize } from '../constants'
 
 const styles = {
     container: {
@@ -9,38 +11,47 @@ const styles = {
         width: '100%',
         paddingTop: 30,
         paddingBottom: 30,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: fontSize.xLarge,
     },
     contentContainer: {
         backgroundColor: colors.beige,
         width: '60%',
+        minHeight: '35vh',
         paddingLeft: '20%',
         paddingRight: '20%',
-        paddingTop: 30,
-        paddingBottom: 30,
-        textAlign: 'center'
-    },
-    content: {
-        gridColumn: '2',
-        backgroundColor: 'inherit',
-        textAlign: 'left'
+        paddingTop: '6%',
+        paddingBottom: '6%',
+        textAlign: 'center',
     },
 }
 
-function BlogPost({ title, child }) {
-    
-  return (
-    <div className="page" style={styles.container}>
-        <div className="page-title" style={styles.title}>
-            {title}
-        </div>
-        <div className="page-content-container" style={styles.contentContainer}>
-            <div style={styles.contentContainer}>
-                {child}
+function BlogPost() {
+    const { postId, title } = useParams();
+    const [ content, setContent ] = useState("");
+
+    useEffect(() => {
+        async function fetchData() {
+            const _content = await BlogPostService.get(postId)
+            setContent(_content)
+        }
+        fetchData();
+      }, [postId, title]);
+
+
+    return (
+        <div className="page" style={styles.container}>
+            <div className="page-title" style={styles.title}>
+                {title}
+            </div>
+            <div className="page-content-container" style={styles.contentContainer}>
+                <div style={styles.contentContainer}>
+                    {content}
+                </div>
             </div>
         </div>
-    </div>
-  );
+    );
 }
 
 export default BlogPost;

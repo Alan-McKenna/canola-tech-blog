@@ -16,16 +16,12 @@ const styles = {
     contentContainer: {
         backgroundColor: colors.beige,
         width: '60%',
+        minHeight: '35vh',
         paddingLeft: '20%',
         paddingRight: '20%',
-        paddingTop: 30,
-        paddingBottom: 30,
-        textAlign: 'center'
-    },
-    content: {
-        gridColumn: '2',
-        backgroundColor: 'inherit',
-        textAlign: 'left'
+        paddingTop: '6%',
+        paddingBottom: '6%',
+        textAlign: 'center',
     },
 }
 

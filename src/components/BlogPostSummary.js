@@ -2,11 +2,16 @@ import React from 'react';
 
 import BlogPostMeta from './BlogPostMeta'
 import BlogPostTags from './BlogPostTags'
+import { useHistory } from "react-router-dom";
 
-import { fontSize } from '../constants'
+import { fontSize, routes } from '../constants'
 
 
 const styles = {
+    container: {
+        cursor: 'pointer',
+        marginBottom: 50
+    },
     title: {
         fontSize: fontSize.xLarge,
         padding: 25,
@@ -20,10 +25,15 @@ const styles = {
 }
 
 
-function BlogPostSummary({ title, tags, date, summary, author }) {
-    
+function BlogPostSummary({ id, title, tags, date, summary, author }) {
+    const history = useHistory()
+
+    const toPost = () => {
+        history.push(`${routes.post}/${id}/${title}`)
+    }
+
     return (
-      <div className="blog-post-summary">
+      <div className="blog-post-summary" style={styles.container} onClick={(id) => toPost(id)}>
 
         <BlogPostTags tags={tags}/>
         
