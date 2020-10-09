@@ -5,18 +5,11 @@ import { useHistory } from "react-router-dom";
 import BlogPostService from '../services/blogPost.service'
 
 import { routes } from "../constants";
-import { colors } from "../styles";
+import { button } from "../styles";
 import { EDITOR_JS_TOOLS } from "../editorConstants";
 
 const styles = {
-    submit: {
-        backgroundColor: colors.red,
-        color: 'white',
-        padding: '12px 20px',
-        border: 'none',
-        borderRadius: '4px',
-        cursor: 'pointer',
-    },
+    submit: button,
     row: {
         paddingTop: 10,
     }

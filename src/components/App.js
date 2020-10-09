@@ -20,7 +20,8 @@ import './App.css'
 
 const styles = {
   root: {
-      minHeight: '100vh'
+      minHeight: '100vh',
+      position: 'relative',
   }
 }
 
@@ -54,7 +55,10 @@ function App() {
             <BlogPost/>
           </Route>
         </Switch>
-
+        
+        {/* spacer */}
+        <div style={{height: '25vh'}}></div>
+        {/* spacer */}
         <AppFooter/>
       </div>
     </BrowserRouter>

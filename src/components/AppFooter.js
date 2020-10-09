@@ -3,16 +3,12 @@ import React from 'react';
 import { colors } from '../styles'
 
 const styles = {
-    wrapper: {
-        position: 'relative',
-        minHeight: '100vh'
-    },
     container: {
         height: '25vh',
         backgroundColor: colors.black,
         width: '100%',
-        // position: 'absolute',
-        // bottom: 0
+        position: 'absolute',
+        bottom: 0
     }
 }
 

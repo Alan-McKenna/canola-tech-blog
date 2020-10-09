@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { colors } from '../styles'
+import { button } from '../styles'
 
 const styles = {
     container: {
@@ -19,14 +19,7 @@ const styles = {
         marginBottom: '16px',
         resize: 'vertical',
     },
-    submit: {
-        backgroundColor: colors.red,
-        color: 'white',
-        padding: '12px 20px',
-        border: 'none',
-        borderRadius: '4px',
-        cursor: 'pointer',
-    }
+    submit: button
 }
 
 
