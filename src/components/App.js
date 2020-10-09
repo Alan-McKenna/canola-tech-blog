@@ -51,13 +51,13 @@ function App() {
           <Route exact path={routes.createPost}>
             <CreatePost/>
           </Route>
-          <Route path={routes.post}>
+          <Route path={`${routes.post}/:postId/:title`}>
             <BlogPost/>
           </Route>
         </Switch>
-        
+
         {/* spacer */}
-        <div style={{height: '25vh'}}></div>
+        <div style={{height: '15vh'}}></div>
         {/* spacer */}
         <AppFooter/>
       </div>

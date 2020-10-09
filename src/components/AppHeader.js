@@ -10,7 +10,7 @@ import { device } from '../styles'
 
 
 function AppHeader({ title, navLinks }) {
-    const isMobile = useMediaQuery({ query: `(max-width: ${device.mobile})` })
+    const isMobile = useMediaQuery({ query: `(max-width: ${device.tablet})` })
     
     const styles = {
         container: {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
 
+import { fontSize } from '../styles'
 
 function HeaderNavLink( { navLink, setIsComponentVisible }) {
     
@@ -13,6 +14,7 @@ function HeaderNavLink( { navLink, setIsComponentVisible }) {
             textDecoration: 'none',
             textDecorationColor: 'none',
             color: 'inherit',
+            fontSize: fontSize.large
         }
     }
 

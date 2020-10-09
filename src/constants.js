@@ -5,7 +5,7 @@ export const routes = {
     about: "/about",
     contact: "/contact",
     blog:"/blog",
-    post: "/blog/post/:postId/:title",
+    post: "/blog/post",
     // for dev only
     createPost: "/blog/create",
 }

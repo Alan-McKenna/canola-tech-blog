@@ -11,13 +11,13 @@ export const fontSize = {
     xxLarge: '10vh',
     xLarge: '5vh',
     large: '3vh',
-    medium: '2vh',
+    medium: '21px',
     small: '1vh',
 }
 
 export const device = {
     mobile: '600px',
-    tablet: '900px'
+    tablet: '1000px'
 }
 
 export const button = {

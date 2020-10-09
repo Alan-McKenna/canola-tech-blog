@@ -1,28 +1,35 @@
 import React from 'react';
+import { useMediaQuery } from 'react-responsive'
 
 import Page from './Page'
 
 import { about } from '../constants'
-import { fontSize } from '../styles'
+import { fontSize, device } from '../styles'
 
-const styles = {
-  content: {
-        fontSize: fontSize.medium
-
-  },
-}
 
 
 function About() {
+  const isTablet = useMediaQuery({ query: `(max-width: ${device.tablet})` })
     
-  return (
-    <div className="about">
-        <Page 
-            title={about.title}
-            child={<span style={styles.content}>{about.content}</span>}
-        />
-    </div>
-  );
+  const styles = {
+    content: {
+          padding: (isTablet ? 30: 0),
+          fontSize: fontSize.medium,
+          textAlign: 'justify',
+          textJustify: 'inter-word',
+          lineHeight: '32px',
+          letterSpacing: '-0.003em',
+
+    },
+  }
+    return (
+      <div className="about">
+          <Page 
+              title={about.title}
+              child={<div style={styles.content}>{about.content}</div>}
+          />
+      </div>
+    );
 }
 
 export default About;

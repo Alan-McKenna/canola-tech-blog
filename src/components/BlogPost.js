@@ -8,7 +8,7 @@ import { colors, fontSize, device } from '../styles'
 
 
 function BlogPost() {
-    const isMobile = useMediaQuery({ query: `(max-width: ${device.tablet})` })
+    const isTablet = useMediaQuery({ query: `(max-width: ${device.tablet})` })
     
     const styles = {
         container: {
@@ -23,12 +23,16 @@ function BlogPost() {
         },
         contentContainer: {
             backgroundColor: colors.beige,
-            width: (isMobile ? '90%' :'70%'),
-            paddingLeft: (isMobile ? '5%' :'15%'),
-            paddingRight: (isMobile ? '5%' :'15%'),
+            width: (isTablet ? '90%' :'60%'),
+            paddingLeft: (isTablet ? '5%' :'20%'),
+            paddingRight: (isTablet ? '5%' :'20%'),
             paddingTop: 30,
             paddingBottom: '6%',
-            textAlign: 'center',
+            textAlign: 'justify',
+            textJustify: 'inter-word',
+            lineHeight: '32px',
+            letterSpacing: '-0.003em',
+            fontSize: fontSize.medium,
         },
     }
 

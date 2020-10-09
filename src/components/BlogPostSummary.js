@@ -22,6 +22,9 @@ const styles = {
         fontSize: fontSize.medium,
         padding: 40,
         paddingBottom: 40,
+        textAlign: 'justify',
+        textJustify: 'inter-word',
+        letterSpacing: '-0.003em',
     },
 }
 

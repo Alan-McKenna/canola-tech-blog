@@ -3,7 +3,7 @@ import React from 'react';
 import HeaderNavLink from './HeaderNavLink'
 import useComponentVisible from './useComponentVisible'
 
-import { colors } from '../styles'
+import { colors, fontSize } from '../styles'
 
 const styles = {
     container: {
@@ -18,7 +18,8 @@ const styles = {
     },
     navMenuButton: {
         cursor: 'pointer',
-        padding: 20
+        padding: 20,
+        fontSize: fontSize.large
     }
 }
 

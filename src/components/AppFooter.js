@@ -4,7 +4,7 @@ import { colors } from '../styles'
 
 const styles = {
     container: {
-        height: '25vh',
+        height: '15vh',
         backgroundColor: colors.black,
         width: '100%',
         position: 'absolute',
