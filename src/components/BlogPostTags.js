@@ -2,11 +2,6 @@ import React from 'react';
 
 import TagLink from './TagLink'
 
-const styles = {
-    container: {
-    },
-}
-
 
 function BlogPostTags({ tags }) {
     

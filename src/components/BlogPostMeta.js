@@ -1,12 +1,6 @@
 import React from 'react';
 
 
-const styles = {
-    container: {
-    },
-}
-
-
 function BlogPostMeta({ date, author }) {
     
     return (
