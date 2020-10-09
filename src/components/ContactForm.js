@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { colors } from '../constants'
+import { colors } from '../styles'
 
 const styles = {
     container: {

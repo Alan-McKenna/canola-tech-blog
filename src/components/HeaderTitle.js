@@ -1,7 +1,8 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
 
-import { fontSize, routes } from '../constants'
+import { routes } from '../constants'
+import { fontSize } from '../styles'
 
 const styles = {
     container: {

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive'
 
 import BlogPostService from '../services/blogPost.service.js'
-import { colors, fontSize, device } from '../constants'
+import { colors, fontSize, device } from '../styles'
 
 
 

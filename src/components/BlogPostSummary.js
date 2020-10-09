@@ -4,7 +4,8 @@ import BlogPostMeta from './BlogPostMeta'
 import BlogPostTags from './BlogPostTags'
 import { useHistory } from "react-router-dom";
 
-import { fontSize, routes } from '../constants'
+import { routes } from '../constants'
+import { fontSize } from '../styles'
 
 
 const styles = {

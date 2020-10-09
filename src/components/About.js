@@ -2,7 +2,8 @@ import React from 'react';
 
 import Page from './Page'
 
-import { about, fontSize } from '../constants'
+import { about } from '../constants'
+import { fontSize } from '../styles'
 
 const styles = {
   content: {

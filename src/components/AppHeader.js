@@ -5,7 +5,7 @@ import HeaderTitle from './HeaderTitle'
 import HeaderNavBar from './HeaderNavBar'
 import HeaderNavBarMobile from './HeaderNavBarMobile'
 
-import { device } from '../constants'
+import { device } from '../styles'
 
 
 
@@ -23,9 +23,6 @@ function AppHeader({ title, navLinks }) {
             position: 'absolute',
             top: 10,
             left: 10,
-            // marginTop: 'auto',
-            // marginBottom: 'auto',
-            // gridColumn: '1 / span 2'
         },
         navBar: {
             marginTop: 'auto',

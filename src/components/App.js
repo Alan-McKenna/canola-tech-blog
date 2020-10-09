@@ -12,8 +12,11 @@ import About from './About';
 import Contact from './Contact';
 import Blog from './Blog';
 import BlogPost from './BlogPost';
+import CreatePost from './CreatePost';
 
-import { title, navLinks } from '../constants'
+import { title, navLinks, routes } from '../constants'
+
+import './App.css'
 
 const styles = {
   root: {
@@ -32,19 +35,22 @@ function App() {
         />
 
         <Switch>
-          <Route exact path="/">
+          <Route exact path={routes.home}>
             <Home/>
           </Route>
-          <Route exact path="/about">
+          <Route exact path={routes.about}>
             <About/>
           </Route>
-          <Route exact path="/contact">
+          <Route exact path={routes.contact}>
             <Contact/>
           </Route>
-          <Route exact path="/blog">
+          <Route exact path={routes.blog}>
             <Blog/>
           </Route>
-          <Route path="/blog/post/:postId/:title">
+          <Route exact path={routes.createPost}>
+            <CreatePost/>
+          </Route>
+          <Route path={routes.post}>
             <BlogPost/>
           </Route>
         </Switch>

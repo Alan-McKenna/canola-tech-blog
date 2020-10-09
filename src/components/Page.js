@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive'
 
-import { colors, fontSize, device } from '../constants'
+import { colors, fontSize, device } from '../styles'
 
 function Page({ title, child }) {
     const isMobile = useMediaQuery({ query: `(max-width: ${device.mobile})` })

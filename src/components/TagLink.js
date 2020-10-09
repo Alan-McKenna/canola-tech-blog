@@ -2,7 +2,7 @@ import React from 'react';
 
 import { NavLink } from "react-router-dom";
 
-import { colors } from '../constants'
+import { colors } from '../styles'
 
 const styles = {
     container: {

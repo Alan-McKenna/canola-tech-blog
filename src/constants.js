@@ -5,35 +5,19 @@ export const routes = {
     about: "/about",
     contact: "/contact",
     blog:"/blog",
-    post: "/blog/post"
+    post: "/blog/post/:postId/:title",
+    // for dev only
+    createPost: "/blog/create",
 }
 
 export const navLinks = [
     { name: "Home", url: "/" },
     { name: "About", url: "/about" },
     { name: "Contact", url: "/contact" },
-    { name: "Blog", url: "/blog" }
+    { name: "Blog", url: "/blog" },
+    // for dev only
+    { name: "Create Post", url: "/blog/create" }
 ]
-
-export const colors = {
-    white: 'white',
-    black: '#264653',
-    beige: '#f5efe0',
-    red: '#cd2653',
-}
-
-export const fontSize = {
-    xxLarge: '10vh',
-    xLarge: '5vh',
-    large: '3vh',
-    medium: '2vh',
-    small: '1vh',
-}
-
-export const device = {
-    mobile: '600px',
-    tablet: '900px'
-}
 
 // For Development
 export const lorum = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
@@ -54,6 +38,10 @@ export const about = {
 
 export const contact = {
     title: "Contact"
+}
+
+export const createPost = {
+    title: "Create Post"
 }
 
 export const home = {

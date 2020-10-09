@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import HeaderNavLink from './HeaderNavLink'
 import useComponentVisible from './useComponentVisible'
 
-import { colors } from '../constants'
+import { colors } from '../styles'
 
 const styles = {
     container: {
@@ -31,8 +31,15 @@ function HeaderNavBarMobile( { navLinks }) {
         ref={ref}
         style={isComponentVisible ? styles.expandedContainer : styles.container} 
     >
+        <div 
+            style={styles.navMenuButton}
+            className="nav-menu-button"
+            onClick={() => setIsComponentVisible(!isComponentVisible)}
+        >
+            X
+        </div>
         { isComponentVisible
-        ?
+        &&
         navLinks.map((navLink, index) => {
             return (
                 <div key={index}>
@@ -43,14 +50,6 @@ function HeaderNavBarMobile( { navLinks }) {
                 </div>
             )
         })
-        :
-        <div 
-            style={styles.navMenuButton}
-            className="nav-menu-button"
-            onClick={() => setIsComponentVisible(true)}
-        >
-            X
-        </div>
         }
     </div>
   );
