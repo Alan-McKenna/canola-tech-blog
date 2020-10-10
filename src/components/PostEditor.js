@@ -24,7 +24,6 @@ function RichTextEditor() {
 
     async function handleSave() {
         const savedData = await editorInstance.save();
-        console.log(savedData)
         if(BlogPostService.save(savedData)) {
             // history.push(routes.home);
         }

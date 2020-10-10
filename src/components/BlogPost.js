@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive'
 
+import BlogPostContent from './BlogPostContent'
 import BlogPostService from '../services/blogPost.service.js'
 import { colors, fontSize, device } from '../styles'
 
@@ -37,7 +38,7 @@ function BlogPost() {
     }
 
     const { postId, title } = useParams();
-    const [ content, setContent ] = useState("");
+    const [ content, setContent ] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
@@ -55,7 +56,7 @@ function BlogPost() {
             </div>
             <div className="page-content-container" style={styles.contentContainer}>
                 <div style={styles.contentContainer}>
-                    {content}
+                    <BlogPostContent content={content}/>
                 </div>
             </div>
         </div>

@@ -2,6 +2,8 @@ import AuthService from './auth.service'
 import { lorum, routes } from '../constants'
 import config from '../config'
 
+import { blogPost } from '../constants'
+
 const domain = config[process.env.NODE_ENV].domain;
 const protocol = config[process.env.NODE_ENV].protocol;
 const baseUrl = `${protocol}${domain}`;
@@ -38,7 +40,8 @@ class BlogPostService {
   }
 
   async get(postId) {
-    return lorum + lorum + lorum + lorum + lorum + lorum + lorum + lorum + lorum + lorum + lorum + lorum
+    return blogPost.postContent.blocks
+    // return lorum + lorum + lorum + lorum + lorum + lorum + lorum + lorum + lorum + lorum + lorum + lorum
   }
 }
 
