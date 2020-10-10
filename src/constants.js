@@ -6,8 +6,7 @@ export const routes = {
     contact: "/contact",
     blog:"/blog",
     post: "/blog/post",
-    // for dev only
-    createPost: "/blog/create",
+    createPost: "/blog/post/create",
 }
 
 export const navLinks = [
@@ -16,7 +15,7 @@ export const navLinks = [
     { name: "Contact", url: "/contact" },
     { name: "Blog", url: "/blog" },
     // for dev only
-    { name: "Create Post", url: "/blog/create" }
+    { name: "Create Post", url: "/blog/post/create" }
 ]
 
 // For Development
