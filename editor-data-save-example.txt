@@ -1,0 +1,76 @@
+Comes in ordered JSON Array under "blocks" object
+
+{time: 1602324061268, blocks: Array(9), version: "2.18.0"}
+
+
+blocks: Array(9)
+0:
+data:
+items: Array(2)
+0: "List1"
+1: "List2"
+length: 2
+__proto__: Array(0)
+style: "ordered"
+__proto__: Object
+type: "list"
+__proto__: Object
+1:
+data:
+text: "Text data"
+__proto__: Object
+type: "paragraph"
+__proto__: Object
+2:
+data:
+content: Array(2)
+0: (2) ["column Name1", "column Name2"]
+1: (2) ["data1", "data2"]
+length: 2
+__proto__: Array(0)
+__proto__: Object
+type: "table"
+__proto__: Object
+3:
+data:
+code: "code input↵"
+__proto__: Object
+type: "code"
+__proto__: Object
+4:
+data:
+message: "warning message"
+title: "warning"
+__proto__: Object
+type: "warning"
+__proto__: Object
+5:
+data:
+link: ""
+meta: {}
+__proto__: Object
+type: "linkTool"
+__proto__: Object
+6:
+data:
+level: 2
+text: "Heading"
+__proto__: Object
+type: "header"
+__proto__: Object
+7:
+data:
+__proto__: Object
+type: "delimiter"
+__proto__: Object
+8:
+data:
+html: "raw html"
+__proto__: Object
+type: "raw"
+__proto__: Object
+length: 9
+__proto__: Array(0)
+time: 1602324061268
+version: "2.18.0"
+__proto__: Object

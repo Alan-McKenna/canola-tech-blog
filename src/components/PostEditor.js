@@ -1,12 +1,13 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import EditorJs from "react-editor-js";
 import { useHistory } from "react-router-dom";
 
-import BlogPostService from '../services/blogPost.service'
+import BlogPostService from '../services/blogPost.service.js'
 
 import { routes } from "../constants";
 import { button } from "../styles";
 import { EDITOR_JS_TOOLS } from "../editorConstants";
+
 
 const styles = {
     submit: button,
@@ -16,22 +17,24 @@ const styles = {
 }
 
 
-class RichTextEditor extends Component {
+function RichTextEditor() {
+    const [ editorInstance, setEditorInstance ] = useState("");
+    
+    // const history = useHistory();
 
-    async handleSave() {
-        let history = useHistory();
-        const savedData = await this.editorInstance.save();
+    async function handleSave() {
+        const savedData = await editorInstance.save();
+        console.log(savedData)
         if(BlogPostService.save(savedData)) {
-        history.push(routes.home);
+            // history.push(routes.home);
         }
     }
 
 
-    render() {
-        return (
+    return (
         <>
         <EditorJs
-            instanceRef={instance => this.editorInstance = instance}
+            instanceRef={instance => setEditorInstance(instance)}
             tools={EDITOR_JS_TOOLS}
             data={{
             blocks: [],
@@ -39,15 +42,14 @@ class RichTextEditor extends Component {
         />
 
         <div className="row"
-            onClick={() => this.handleSave()}
+            onClick={() => handleSave()}
             style={styles.row}
         >
             <input type="submit" value="Save" style={styles.submit}/>
         </div>
 
         </>
-        );
-    }
+    );
 }
 
 
