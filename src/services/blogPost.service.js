@@ -41,7 +41,6 @@ class BlogPostService {
 
   async get(postId) {
     return blogPost.postContent.blocks
-    // return lorum + lorum + lorum + lorum + lorum + lorum + lorum + lorum + lorum + lorum + lorum + lorum
   }
 }
 

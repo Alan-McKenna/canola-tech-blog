@@ -17,7 +17,7 @@ const styles = {
 }
 
 
-function RichTextEditor() {
+function PostEditor() {
     const [ editorInstance, setEditorInstance ] = useState("");
     
     // const history = useHistory();
@@ -52,4 +52,4 @@ function RichTextEditor() {
 }
 
 
-export default RichTextEditor;
+export default PostEditor;

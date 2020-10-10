@@ -15,14 +15,35 @@ import InlineCode from "@editorjs/inline-code";
 import SimpleImage from "@editorjs/simple-image";
 
 export const EDITOR_JS_TOOLS = {
-  embed: Embed,
+  embed: {
+    class: Embed,
+    config: {
+      services: {
+        youtube: true,
+        twitter: true,
+        imgur: true,
+        instagram: true,
+        gfycat: true,
+        codepen: true
+      }
+    }
+  },
   table: Table,
   marker: Marker,
   list: List,
   warning: Warning,
   code: Code,
   linkTool: LinkTool,
-  image: Image,
+  image: {
+    // TODO: Read docs - this requires a backend services to upload and respond with POST requests -> https://github.com/editor-js/image
+    class: Image,
+    config: {
+      endpoints: {
+        byFile: '', // Your backend file uploader endpoint
+        byUrl: '', // Your endpoint that provides uploading by Url
+      }
+    }
+  },
   raw: Raw,
   header: Header,
   quote: Quote,
