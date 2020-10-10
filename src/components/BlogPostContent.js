@@ -43,10 +43,12 @@ function TableBlock({ data }) {
     return (
         <div className="table-block">
             <table>
-                <tr>
-                {renderHeader(data)}
-                </tr>
-                {renderFields(data)}
+                <tbody>
+                    <tr>
+                    {renderHeader(data)}
+                    </tr>
+                    {renderFields(data)}
+                </tbody>
             </table>
         </div>
     )
@@ -56,10 +58,43 @@ function TableBlock({ data }) {
 function CodeBlock({ data }) {
     return (
         <div className="code-block">
-
+            <samp>{data.code}</samp>
         </div>
     )
     
+}
+
+function HeaderBlock({ data }) {
+    return (
+        <div className="header-block">
+            <h2>{data.text}</h2>
+        </div>
+    )
+
+}
+
+function DelimiterBlock({ data }) {
+    const styles = {
+        rounded: {
+            borderTop: '8px solid #bbb',
+            borderRadius: '5px'
+          }
+    }
+    return (
+        <div className="delimiter-block">
+            <hr style={styles.rounded}></hr>
+        </div>
+    )
+
+}
+
+function RawBlock({ data }) {
+    return (
+        <div className="raw-html-block">
+
+        </div>
+    )
+
 }
 
 function WarningBlock({ data }) {
@@ -74,33 +109,6 @@ function WarningBlock({ data }) {
 function LinkToolBlock({ data }) {
     return (
         <div className="link-block">
-
-        </div>
-    )
-
-}
-
-function HeaderBlock({ data }) {
-    return (
-        <div className="header-block">
-
-        </div>
-    )
-
-}
-
-function DelimiterBlock({ data }) {
-    return (
-        <div className="delimiter-block">
-
-        </div>
-    )
-
-}
-
-function RawBlock({ data }) {
-    return (
-        <div className="raw-html-block">
 
         </div>
     )
