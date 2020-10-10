@@ -17,13 +17,14 @@ const styles = {
 }
 
 
-function PostEditor() {
+function PostEditor({ title }) {
     const [ editorInstance, setEditorInstance ] = useState("");
     
     // const history = useHistory();
 
     async function handleSave() {
         const savedData = await editorInstance.save();
+        savedData["title"] = title
         if(BlogPostService.save(savedData)) {
             // history.push(routes.home);
         }

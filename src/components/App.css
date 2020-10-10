@@ -1,3 +1,7 @@
 .codex-editor__redactor {
     background-color: #F6F0ED;
 }
+
+.blog-post-title-input:focus {
+    outline: none;
+}
