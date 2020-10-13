@@ -11,9 +11,9 @@ const config = {
         auth_service: { 
             protocol: "http://",
             domain: "127.0.0.1:5000",
-            login: "/" ,
-            register: "/",
-            checkJwt: "/",
+            login: "/token" ,
+            register: "/user",
+            checkJwt: "/token",
         }
     },
     production: {

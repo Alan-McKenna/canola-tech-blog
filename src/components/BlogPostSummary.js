@@ -48,7 +48,7 @@ function BlogPostSummary({ id, title, tags, date, summary, author }) {
         <BlogPostMeta date={date} author={author}/>
 
         <div className="blog-post-summary-summary" style={styles.summary}>
-            {summary}
+            {summary.substring(0, 400)}...
         </div>
       </div>
     );

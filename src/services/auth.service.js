@@ -1,9 +1,7 @@
 import config from '../config'
-// import { routes } from '../constants'
 
-const domain = config[process.env.NODE_ENV].domain;
-const protocol = config[process.env.NODE_ENV].protocol;
-const baseUrl = `${protocol}${domain}`;
+const auth_service = config[process.env.NODE_ENV].auth_service;
+const baseUrl = `${auth_service.protocol}${auth_service.domain}`;
 
 
 class AuthService {
@@ -19,7 +17,7 @@ class AuthService {
       redirect: 'follow'
     };
     try {
-      const response = await fetch(`${baseUrl}/token`, requestOptions)
+      const response = await fetch(`${baseUrl}/${auth_service.login}`, requestOptions)
       const res = await response.json()
       if (res.jwt) {
         localStorage.setItem("jwt", JSON.stringify(res.jwt));
@@ -47,7 +45,7 @@ class AuthService {
     };
 
     try {
-      const response = await fetch(`${baseUrl}/user`, requestOptions)
+      const response = await fetch(`${baseUrl}/${auth_service.register}`, requestOptions)
       const res = await response.json()
       debugger
       if (res.status === 200) {
@@ -72,7 +70,7 @@ class AuthService {
     };
     try {
       debugger
-      const response = await fetch(`${baseUrl}/token/${jwt}`, requestOptions)
+      const response = await fetch(`${baseUrl}/${auth_service.checkJwt}/${jwt}`, requestOptions)
       const res = await response.json()
       if (res.status === 200) {
         localStorage.setItem("username", JSON.stringify(res.decoded_jwt.username));

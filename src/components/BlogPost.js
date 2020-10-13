@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive'
+import Loader from 'react-loader-spinner'
 
 import BlogPostContent from './BlogPostContent'
 import BlogPostMeta from './BlogPostMeta'
 import BlogPostService from '../services/blogPost.service.js'
 import { colors, fontSize, device } from '../styles'
 
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
 
 function BlogPost() {
@@ -48,6 +50,7 @@ function BlogPost() {
     const [ content, setContent ] = useState([]);
     const [ author, setAuthor ] = useState("");
     const [ date, setDate ] = useState("");
+    const [ isLoading, setIsLoading ] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
@@ -56,12 +59,17 @@ function BlogPost() {
             setAuthor(_post.author)
             setContent(_post.content)
         }
+        setIsLoading(true)
         fetchData();
+        setIsLoading(false)
       }, [postId, title]);
 
 
     return (
         <div className="post" style={styles.container}>
+            {isLoading &&
+                <Loader type="BallTriangle" color="#00BFFF" height={80} width={80} />
+            }
             <div className="post-title" style={styles.title}>
                 {title}
             </div>

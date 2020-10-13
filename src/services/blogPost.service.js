@@ -1,5 +1,4 @@
 import AuthService from './auth.service'
-import { lorum, routes } from '../constants'
 import config from '../config'
 
 const blog_service = config[process.env.NODE_ENV].blog_service;
@@ -7,7 +6,7 @@ const baseUrl = `${blog_service.protocol}${blog_service.domain}`;
 
 
 class BlogPostService {
-  async save(data) {
+  async save(post) {
     var myHeaders = new Headers();
     myHeaders.append("Authorization", 'Bearer ' + AuthService.getJwt());
     myHeaders.append("Content-Type", "application/json");
@@ -16,7 +15,7 @@ class BlogPostService {
       method: 'POST',
       headers: myHeaders,
       redirect: 'follow',
-      body: JSON.stringify(data)
+      body: JSON.stringify(post)
     };
     try {
       const response = await fetch(`${baseUrl}${blog_service.post}`, requestOptions)
@@ -32,13 +31,14 @@ class BlogPostService {
     
   }
 
-  async update(postId) {
+  async update(postId, post) {
     var myHeaders = new Headers();
 
     var requestOptions = {
       method: 'PUT',
       headers: myHeaders,
       redirect: 'follow',
+      body: JSON.stringify(post)
     };
     const url = `${baseUrl}${blog_service.put}/${postId}` 
     try {

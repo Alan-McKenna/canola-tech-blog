@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import EditorJs from "react-editor-js";
 import { useHistory } from "react-router-dom";
+import Loader from 'react-loader-spinner'
 
 import BlogPostService from '../services/blogPost.service.js'
 
@@ -8,6 +9,7 @@ import { routes } from "../constants";
 import { button } from "../styles";
 import { EDITOR_JS_TOOLS } from "../editorConstants";
 
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
 const styles = {
     submit: button,
@@ -19,14 +21,20 @@ const styles = {
 
 function PostEditor({ title }) {
     const [ editorInstance, setEditorInstance ] = useState("");
+    const [ isSaving, setIsSaving ] = useState(false);
     
     // const history = useHistory();
 
     async function handleSave() {
+        setIsSaving(true)
         const savedData = await editorInstance.save();
-        savedData["title"] = title
-        if(BlogPostService.save(savedData)) {
-            // history.push(routes.home);
+        const post = {
+            title: title,
+            tags: [],
+            blocks: savedData.blocks,
+        }
+        if(await BlogPostService.save(post)) {
+            setIsSaving(false)
         }
     }
 
@@ -40,14 +48,16 @@ function PostEditor({ title }) {
             blocks: [],
             }}
         />
-
-        <div className="row"
-            onClick={() => handleSave()}
-            style={styles.row}
-        >
-            <input type="submit" value="Save" style={styles.submit}/>
-        </div>
-
+        {isSaving
+        ?   <Loader type="BallTriangle" color="#00BFFF" height={80} width={80} />
+        
+        :   <div className="row"
+                onClick={() => handleSave()}
+                style={styles.row}
+            >
+                <input type="submit" value="Save" style={styles.submit}/>
+            </div>
+        }
         </>
     );
 }
