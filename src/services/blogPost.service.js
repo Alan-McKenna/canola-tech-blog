@@ -106,7 +106,7 @@ class BlogPostService {
       headers: myHeaders,
       redirect: 'follow',
     };
-    const url = `${baseUrl}${blog_service.get}` + (limit ? `?${limit}` : ``) 
+    const url = `${baseUrl}${blog_service.get}` + (limit ? `?limit=${limit}` : ``) 
     try {
       const response = await fetch(url, requestOptions)
       if (response.status === 200) {
