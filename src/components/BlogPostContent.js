@@ -156,7 +156,7 @@ function BlogPostContent({ content }) {
         <div className="blog-post-content" style={styles.container}>
             {Array.isArray(content) && content.map( (blockData, index) => {
                 return (
-                    <ContentBlock key={index} blockData={blockData}/>
+                    blockData && <ContentBlock key={index} blockData={blockData}/>
                 )
                 })
                 }

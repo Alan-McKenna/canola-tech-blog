@@ -2,46 +2,122 @@ import AuthService from './auth.service'
 import { lorum, routes } from '../constants'
 import config from '../config'
 
-import { blogPost } from '../constants'
-
-const domain = config[process.env.NODE_ENV].domain;
-const protocol = config[process.env.NODE_ENV].protocol;
-const baseUrl = `${protocol}${domain}`;
+const blog_service = config[process.env.NODE_ENV].blog_service;
+const baseUrl = `${blog_service.protocol}${blog_service.domain}`;
 
 
 class BlogPostService {
   async save(data) {
-    console.log(data)
-    // var myHeaders = new Headers();
-    // myHeaders.append("Authorization", 'Bearer ' + AuthService.getJwt());
-    // myHeaders.append("Content-Type", "application/json");
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", 'Bearer ' + AuthService.getJwt());
+    myHeaders.append("Content-Type", "application/json");
 
-    // var requestOptions = {
-    //   method: 'POST',
-    //   headers: myHeaders,
-    //   redirect: 'follow',
-    //   body: JSON.stringify(data)
-    // };
-    // try {
-    //   const response = await fetch(`${baseUrl}${routes.createPost}`, requestOptions)
-    //   const res = await response.json()
-    //   if (res.status === 200) {
-    //     return true
-    //   }
-    //   return false
-    // } catch (e) {
-    //   console.log('error', e);
-    //   return false
-    // }
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      redirect: 'follow',
+      body: JSON.stringify(data)
+    };
+    try {
+      const response = await fetch(`${baseUrl}${blog_service.post}`, requestOptions)
+      if (response.status === 200) {
+        const res = await response.json()
+        return true
+      }
+      return false
+    } catch (e) {
+      console.log('error', e);
+      return false
+    }
     
   }
 
-  async delete(data) {
-    
+  async update(postId) {
+    var myHeaders = new Headers();
+
+    var requestOptions = {
+      method: 'PUT',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+    const url = `${baseUrl}${blog_service.put}/${postId}` 
+    try {
+      const response = await fetch(url, requestOptions)
+      if (response.status === 200) {
+        const res = await response.json()
+        return true
+      }
+      return false
+    } catch (e) {
+      console.log('error', e);
+      return false
+    }
   }
 
-  async get(postId) {
-    return blogPost.postContent.blocks
+  async delete(postId) {
+    var myHeaders = new Headers();
+
+    var requestOptions = {
+      method: 'DELETE',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+    const url = `${baseUrl}${blog_service.delete}/${postId}` 
+    try {
+      const response = await fetch(url, requestOptions)
+      if (response.status === 200) {
+        const res = await response.json()
+        return true
+      }
+      return false
+    } catch (e) {
+      console.log('error', e);
+      return false
+    }
+  }
+
+  async get_post(postId) {
+    var myHeaders = new Headers();
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+    const url = `${baseUrl}${blog_service.get}/${postId}` 
+    try {
+      const response = await fetch(url, requestOptions)
+      if (response.status === 200) {
+        const res = await response.json()
+        return res.post
+      }
+      return {}
+    } catch (e) {
+      console.log('error', e);
+      return {}
+    }
+  }
+
+  async get_posts(limit) {
+    var myHeaders = new Headers();
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+    const url = `${baseUrl}${blog_service.get}` + (limit ? `?${limit}` : ``) 
+    try {
+      const response = await fetch(url, requestOptions)
+      if (response.status === 200) {
+        const res = await response.json()
+        return res.posts
+      }
+      return []
+    } catch (e) {
+      console.log('error', e);
+      return []
+    }
   }
 }
 

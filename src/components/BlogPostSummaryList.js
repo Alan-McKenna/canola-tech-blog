@@ -11,7 +11,7 @@ function BlogPostSummaryList({ posts }) {
       return (
         <BlogPostSummary
           key={index}
-          id={post.id}
+          id={post._id}
           title={post.title}
           tags={post.tags}
           date={post.date}

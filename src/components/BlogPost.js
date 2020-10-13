@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive'
 
 import BlogPostContent from './BlogPostContent'
+import BlogPostMeta from './BlogPostMeta'
 import BlogPostService from '../services/blogPost.service.js'
 import { colors, fontSize, device } from '../styles'
 
@@ -22,6 +23,12 @@ function BlogPost() {
             fontWeight: 'bold',
             fontSize: fontSize.xLarge,
         },
+        meta: {
+            width: '100%',
+            paddingBottom: 30,
+            textAlign: 'center',
+            fontSize: fontSize.medium,
+        },
         contentContainer: {
             backgroundColor: colors.beige,
             width: (isTablet ? '90%' :'60%'),
@@ -39,22 +46,31 @@ function BlogPost() {
 
     const { postId, title } = useParams();
     const [ content, setContent ] = useState([]);
+    const [ author, setAuthor ] = useState("");
+    const [ date, setDate ] = useState("");
 
     useEffect(() => {
         async function fetchData() {
-            const _content = await BlogPostService.get(postId)
-            setContent(_content)
+            const _post = await BlogPostService.get_post(postId)
+            setDate(_post.date)
+            setAuthor(_post.author)
+            setContent(_post.content)
         }
         fetchData();
       }, [postId, title]);
 
 
     return (
-        <div className="page" style={styles.container}>
-            <div className="page-title" style={styles.title}>
+        <div className="post" style={styles.container}>
+            <div className="post-title" style={styles.title}>
                 {title}
             </div>
-            <div className="page-content-container" style={styles.contentContainer}>
+        
+            <div className="blog-post-meta" style={styles.meta}>
+                <BlogPostMeta date={date} author={author}/>
+            </div>
+
+            <div className="post-content-container" style={styles.contentContainer}>
                 <div style={styles.contentContainer}>
                     <BlogPostContent content={content}/>
                 </div>
