@@ -2,15 +2,12 @@ import React from 'react';
 
 import { NavLink } from "react-router-dom";
 
-import { colors } from '../styles'
+import { link } from '../styles'
 
 const styles = {
     container: {
     },
-    tag: {
-      color: colors.red,
-      textDecoration: 'underline'
-    },
+    tag: link,
 }
 
 

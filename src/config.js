@@ -23,6 +23,8 @@ const config = {
             blog:"/blog",
             post: "/blog/post",
             createPost: "/blog/post/create",
+            admin: "/admin",
+            auth: "/auth",
         },
         navLinks: [
             { name: "Home", url: "/" },
@@ -30,7 +32,8 @@ const config = {
             { name: "Contact", url: "/contact" },
             { name: "Blog", url: "/blog" },
             // for dev only
-            { name: "Create Post", url: "/blog/post/create" }
+            { name: "Create Post", url: "/blog/post/create" },
+            { name: "Admin", url: "/admin" },
         ]
     },
     production: {

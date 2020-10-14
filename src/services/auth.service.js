@@ -22,6 +22,7 @@ class AuthService {
       if (res.jwt) {
         localStorage.setItem("jwt", JSON.stringify(res.jwt));
         localStorage.setItem("username", JSON.stringify(username));
+        localStorage.setItem("authTimeout", this.getTimeTomorrow());
         return true;
       }
       return false
@@ -83,12 +84,32 @@ class AuthService {
     }
   }
 
+  getTimeNow() {
+    return new Date().getTime();
+  }
+
+  getTimeTomorrow() {
+    const today = new Date()
+    return today.setHours(today.getHours() + 24);
+  }
+
+  getAuthTimeout() {
+    return JSON.parse(localStorage.getItem('authTimeout'));
+  }
+
+  getIsAuthenticated() {
+    return (
+      JSON.parse(localStorage.getItem('username')) !== null 
+      && (this.getAuthTimeout() > this.getTimeNow())
+      );
+  }
+
   getCurrentUser() {
-    return JSON.parse(localStorage.getItem('username'));;
+    return JSON.parse(localStorage.getItem('username'));
   }
 
   getJwt() {
-    return JSON.parse(localStorage.getItem('jwt'));;
+    return JSON.parse(localStorage.getItem('jwt'));
   }
 
 }

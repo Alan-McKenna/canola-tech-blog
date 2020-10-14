@@ -13,7 +13,11 @@ import Contact from './Contact';
 import Blog from './Blog';
 import BlogPost from './BlogPost';
 import CreatePost from './CreatePost';
+import AdminDashboard from './AdminDashboard';
+import ProtectedRoute from './ProtectedRoute';
+import AuthPage from './AuthPage';
 
+import AuthService from '../services/auth.service.js'
 import './App.css'
 
 import config from '../config'
@@ -37,24 +41,39 @@ function App() {
         />
 
         <Switch>
-          <Route exact path={_config.routes.home}>
-            <Home/>
-          </Route>
-          <Route exact path={_config.routes.about}>
-            <About/>
-          </Route>
-          <Route exact path={_config.routes.contact}>
-            <Contact/>
-          </Route>
-          <Route exact path={_config.routes.blog}>
-            <Blog/>
-          </Route>
-          <Route exact path={_config.routes.createPost}>
-            <CreatePost/>
-          </Route>
-          <Route path={`${_config.routes.post}/:postId/:title`}>
-            <BlogPost/>
-          </Route>
+          <Route 
+            exact path={_config.routes.home}
+            component={Home}
+          />
+          <Route 
+            exact path={_config.routes.about}
+            component={About}
+          />
+          <Route 
+            exact path={_config.routes.contact}
+            component={Contact}
+          />
+          <Route 
+            exact path={_config.routes.blog}
+            component={Blog}
+          />
+          <Route 
+            exact path={_config.routes.createPost}
+            component={CreatePost}
+          />
+          <Route 
+            path={`${_config.routes.post}/:postId/:title`}
+            component={BlogPost}
+          />
+          <Route 
+            path={_config.routes.auth}
+            component={AuthPage}
+          />
+          <ProtectedRoute
+            exact path={_config.routes.admin}
+            isAuthenticated={AuthService.getIsAuthenticated()}
+            component={AdminDashboard}
+          />
         </Switch>
 
         {/* spacer */}

@@ -29,3 +29,9 @@ export const button = {
     borderRadius: '4px',
     cursor: 'pointer',
 }
+
+export const link = {
+    color: colors.red,
+    cursor: 'pointer',
+    textDecoration: 'underline'
+}
