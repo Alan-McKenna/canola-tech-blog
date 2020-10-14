@@ -14,9 +14,10 @@ import Blog from './Blog';
 import BlogPost from './BlogPost';
 import CreatePost from './CreatePost';
 
-import { title, navLinks, routes } from '../constants'
-
 import './App.css'
+
+import config from '../config'
+const _config = config[process.env.NODE_ENV];
 
 const styles = {
   root: {
@@ -31,27 +32,27 @@ function App() {
       <div className="app" style={styles.root}>
         
         <AppHeader
-          title={title}
-          navLinks={navLinks}
+          title={_config.headerTitle}
+          navLinks={_config.navLinks}
         />
 
         <Switch>
-          <Route exact path={routes.home}>
+          <Route exact path={_config.routes.home}>
             <Home/>
           </Route>
-          <Route exact path={routes.about}>
+          <Route exact path={_config.routes.about}>
             <About/>
           </Route>
-          <Route exact path={routes.contact}>
+          <Route exact path={_config.routes.contact}>
             <Contact/>
           </Route>
-          <Route exact path={routes.blog}>
+          <Route exact path={_config.routes.blog}>
             <Blog/>
           </Route>
-          <Route exact path={routes.createPost}>
+          <Route exact path={_config.routes.createPost}>
             <CreatePost/>
           </Route>
-          <Route path={`${routes.post}/:postId/:title`}>
+          <Route path={`${_config.routes.post}/:postId/:title`}>
             <BlogPost/>
           </Route>
         </Switch>

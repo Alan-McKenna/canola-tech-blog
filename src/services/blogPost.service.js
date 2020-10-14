@@ -12,13 +12,13 @@ class BlogPostService {
     myHeaders.append("Content-Type", "application/json");
 
     var requestOptions = {
-      method: 'POST',
+      method: blog_service.post.method,
       headers: myHeaders,
       redirect: 'follow',
       body: JSON.stringify(post)
     };
     try {
-      const response = await fetch(`${baseUrl}${blog_service.post}`, requestOptions)
+      const response = await fetch(`${baseUrl}${blog_service.post.route}`, requestOptions)
       if (response.status === 200) {
         const res = await response.json()
         return true
@@ -35,12 +35,12 @@ class BlogPostService {
     var myHeaders = new Headers();
 
     var requestOptions = {
-      method: 'PUT',
+      method: blog_service.put.method,
       headers: myHeaders,
       redirect: 'follow',
       body: JSON.stringify(post)
     };
-    const url = `${baseUrl}${blog_service.put}/${postId}` 
+    const url = `${baseUrl}${blog_service.put.route}/${postId}` 
     try {
       const response = await fetch(url, requestOptions)
       if (response.status === 200) {
@@ -58,11 +58,11 @@ class BlogPostService {
     var myHeaders = new Headers();
 
     var requestOptions = {
-      method: 'DELETE',
+      method: blog_service.delete.method,
       headers: myHeaders,
       redirect: 'follow',
     };
-    const url = `${baseUrl}${blog_service.delete}/${postId}` 
+    const url = `${baseUrl}${blog_service.delete.route}/${postId}` 
     try {
       const response = await fetch(url, requestOptions)
       if (response.status === 200) {
@@ -80,11 +80,11 @@ class BlogPostService {
     var myHeaders = new Headers();
 
     var requestOptions = {
-      method: 'GET',
+      method: blog_service.get.method,
       headers: myHeaders,
       redirect: 'follow',
     };
-    const url = `${baseUrl}${blog_service.get}/${postId}` 
+    const url = `${baseUrl}${blog_service.get.route}/${postId}` 
     try {
       const response = await fetch(url, requestOptions)
       if (response.status === 200) {
@@ -102,11 +102,11 @@ class BlogPostService {
     var myHeaders = new Headers();
 
     var requestOptions = {
-      method: 'GET',
+      method: blog_service.get.method,
       headers: myHeaders,
       redirect: 'follow',
     };
-    const url = `${baseUrl}${blog_service.get}` + (limit ? `?limit=${limit}` : ``) 
+    const url = `${baseUrl}${blog_service.get.route}` + (limit ? `?limit=${limit}` : ``) 
     try {
       const response = await fetch(url, requestOptions)
       if (response.status === 200) {

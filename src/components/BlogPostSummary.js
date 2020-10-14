@@ -4,9 +4,10 @@ import BlogPostMeta from './BlogPostMeta'
 import BlogPostTags from './BlogPostTags'
 import { useHistory } from "react-router-dom";
 
-import { routes } from '../constants'
 import { fontSize } from '../styles'
 
+import config from '../config'
+const _config = config[process.env.NODE_ENV];
 
 const styles = {
     container: {
@@ -33,7 +34,7 @@ function BlogPostSummary({ id, title, tags, date, summary, author }) {
     const history = useHistory()
 
     const toPost = () => {
-        history.push(`${routes.post}/${id}/${title}`)
+        history.push(`${_config.routes.post}/${id}/${title}`)
     }
 
     return (

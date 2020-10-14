@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import EditorJs from "react-editor-js";
-import { useHistory } from "react-router-dom";
 import Loader from 'react-loader-spinner'
 
 import BlogPostService from '../services/blogPost.service.js'
 
-import { routes } from "../constants";
 import { button } from "../styles";
 import { EDITOR_JS_TOOLS } from "../editorConstants";
 

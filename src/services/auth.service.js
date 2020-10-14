@@ -12,12 +12,12 @@ class AuthService {
 
 
     var requestOptions = {
-      method: 'POST',
+      method: auth_service.login.method,
       headers: myHeaders,
       redirect: 'follow'
     };
     try {
-      const response = await fetch(`${baseUrl}/${auth_service.login}`, requestOptions)
+      const response = await fetch(`${baseUrl}/${auth_service.login.route}`, requestOptions)
       const res = await response.json()
       if (res.jwt) {
         localStorage.setItem("jwt", JSON.stringify(res.jwt));
@@ -38,14 +38,14 @@ class AuthService {
     var raw = JSON.stringify({"username":username,"email":email,"password":password});
 
     var requestOptions = {
-      method: 'POST',
+      method: auth_service.register.method,
       headers: myHeaders,
       body: raw,
       redirect: 'follow'
     };
 
     try {
-      const response = await fetch(`${baseUrl}/${auth_service.register}`, requestOptions)
+      const response = await fetch(`${baseUrl}/${auth_service.register.route}`, requestOptions)
       const res = await response.json()
       debugger
       if (res.status === 200) {
@@ -64,13 +64,13 @@ class AuthService {
     myHeaders.append("Content-Type", "application/json");
 
     var requestOptions = {
-      method: 'GET',
+      method: auth_service.checkJwt.method,
       headers: myHeaders,
       redirect: 'follow'
     };
     try {
       debugger
-      const response = await fetch(`${baseUrl}/${auth_service.checkJwt}/${jwt}`, requestOptions)
+      const response = await fetch(`${baseUrl}/${auth_service.checkJwt.route}/${jwt}`, requestOptions)
       const res = await response.json()
       if (res.status === 200) {
         localStorage.setItem("username", JSON.stringify(res.decoded_jwt.username));

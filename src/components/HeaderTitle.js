@@ -1,8 +1,10 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
 
-import { routes } from '../constants'
 import { fontSize } from '../styles'
+
+import config from '../config'
+const _config = config[process.env.NODE_ENV];
 
 const styles = {
     container: {
@@ -16,7 +18,7 @@ function HeaderNavTitle( { title }) {
   const history = useHistory()
   
   function goHome() {
-    history.push(routes.home)
+    history.push(_config.routes.home)
   }
 
   return (
