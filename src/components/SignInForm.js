@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 
 import { button, link } from '../styles'
 
 import config from '../config'
 const _config = config[process.env.NODE_ENV];
-
 
 const styles = {
     container: {
@@ -30,22 +29,57 @@ const styles = {
 
 
 function SignInForm({ setIsNewUser }) {
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [isUsernameValid, setIsUsernameValid] = useState(false)
+    const [isPasswordValid, setsPasswordValid] = useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    
     const history = useHistory()
     // history.push(_config.routes.admin)
+
+    useEffect(() => {
+        setIsUsernameValid(new RegExp(/^[a-zA-Z0-9]+$/)
+                        .test(username))
+    }, [username]);
+
+    useEffect(() => {
+        setsPasswordValid(new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)
+                        .test(password))
+    }, [password]);
     
+    useEffect(() => {
+        const handleSubmit = () => {
+        }
+        
+        if(isSubmitting && isUsernameValid && isPasswordValid) {
+            console.log('inputs are valid')
+            handleSubmit()
+        } else if (isSubmitting) {
+            console.log('inputs are not valid')
+        }
+        setIsSubmitting(false)
+    }, [isSubmitting, isUsernameValid, isPasswordValid]);
+
+
     return (
-        <form id="sign-in-form" style={styles.container} method="POST">
-            <div className="form-group" >
+        <div id="sign-up-form" style={styles.container}>
+            <div>
                 <label htmlFor="username">Username</label>
-                <input style={styles.inputField} type="text" />
+                <input style={styles.inputField} type="text" onChange={(event) => setUsername(event.target.value)}/>
             </div>
             <div>
                 <label htmlFor="password">Password</label>
-                <input style={styles.inputField} type="text" />
+                <input style={styles.inputField} type="password" onChange={(event) => setPassword(event.target.value)}/>
             </div>
-            <button type="submit" style={styles.submit}>Submit</button>
+            
+            <button 
+                style={styles.submit}
+                onClick={() => setIsSubmitting(true)}
+            >Submit
+            </button>
             <p>Don't have an account? <span style={styles.link} onClick={() => setIsNewUser(true)}>Sign Up</span></p>
-        </form>
+        </div>
     );
 }
 
