@@ -37,7 +37,7 @@ function HeaderNavBarMobile( { navLinks }) {
             className="nav-menu-button"
             onClick={() => setIsComponentVisible(!isComponentVisible)}
         >
-            X
+            &times;
         </div>
         { isComponentVisible
         &&

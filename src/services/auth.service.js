@@ -48,7 +48,6 @@ class AuthService {
     try {
       const response = await fetch(`${baseUrl}/${auth_service.register.route}`, requestOptions)
       const res = await response.json()
-      debugger
       if (res.status === 200) {
         return true
       }

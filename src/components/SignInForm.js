@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 
-import { button, link } from '../styles'
+import CustomAlert from './CustomAlert'
+
+import AuthService from '../services/auth.service.js'
+import { button, link, colors } from '../styles'
 
 import config from '../config'
 const _config = config[process.env.NODE_ENV];
@@ -13,6 +16,9 @@ const styles = {
         padding: '20px',
         color: 'inherit',
     },
+    inputContainer: {
+        marginBottom: '35px',
+    },
     inputField: {
         width: '100%',
         padding: '12px',
@@ -20,23 +26,30 @@ const styles = {
         borderRadius: '4px',
         boxSizing: 'border-box',
         marginTop: '6px',
-        marginBottom: '16px',
         resize: 'vertical',
     },
     link: link,
-    submit: button
+    submit: button,
+    tooltip: {
+        textAlign: 'left',
+        position: 'absolute',
+        padding: 5,
+        margin: 5,
+        color: colors.white,
+        backgroundColor: colors.red,
+        borderRadius: '5px',
+    }
 }
-
 
 function SignInForm({ setIsNewUser }) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [isUsernameValid, setIsUsernameValid] = useState(false)
-    const [isPasswordValid, setsPasswordValid] = useState(false)
+    const [isPasswordValid, setsPasswordValid] = useState(true)
     const [isSubmitting, setIsSubmitting] = useState(false)
-    
-    const history = useHistory()
-    // history.push(_config.routes.admin)
+    const [submissionCount, setSubmissionCount] = useState(0)
+    const [showAlert, setShowAlert] = useState(false)
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
 
     useEffect(() => {
         setIsUsernameValid(new RegExp(/^[a-zA-Z0-9]+$/)
@@ -44,40 +57,64 @@ function SignInForm({ setIsNewUser }) {
     }, [username]);
 
     useEffect(() => {
-        setsPasswordValid(new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)
+        setsPasswordValid(new RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
                         .test(password))
     }, [password]);
     
     useEffect(() => {
-        const handleSubmit = () => {
+        const handleSubmit = async () => {
+            const _isAuthenticated = await AuthService.login(username, password)
+            setIsAuthenticated(_isAuthenticated)
+            setShowAlert(true)
         }
         
-        if(isSubmitting && isUsernameValid && isPasswordValid) {
-            console.log('inputs are valid')
-            handleSubmit()
-        } else if (isSubmitting) {
-            console.log('inputs are not valid')
+        if(isSubmitting) {
+            if(isUsernameValid && isPasswordValid) {
+                handleSubmit()
+            } else{
+            }
+            setIsSubmitting(false)
         }
-        setIsSubmitting(false)
-    }, [isSubmitting, isUsernameValid, isPasswordValid]);
+    }, [isSubmitting, isUsernameValid, isPasswordValid, username, password]);
 
+    const handleCloseAlert = () => {
+        setShowAlert(false)
+    }
 
     return (
         <div id="sign-up-form" style={styles.container}>
-            <div>
+            {showAlert && isAuthenticated
+            ? <CustomAlert message={`Successfully authenticated ${username}`} type={'success'} handleCloseAlert={handleCloseAlert}/>
+            : showAlert && !isAuthenticated
+            ? <CustomAlert message={`Failed to authenticate ${username}`} type={'error'} handleCloseAlert={handleCloseAlert}/>
+            : <></>
+            }
+            <div style={styles.inputContainer}>
                 <label htmlFor="username">Username</label>
                 <input style={styles.inputField} type="text" onChange={(event) => setUsername(event.target.value)}/>
+                {!isUsernameValid && submissionCount > 0 &&
+                    <div style={styles.tooltip}>Must only contain alphanumeric characters with no spaces</div>
+                }
             </div>
-            <div>
+            <div style={styles.inputContainer}>
                 <label htmlFor="password">Password</label>
                 <input style={styles.inputField} type="password" onChange={(event) => setPassword(event.target.value)}/>
+                {!isPasswordValid && submissionCount > 0 &&
+                    <div style={styles.tooltip}>Must contain at least one number and special character [!@#$%^&*]</div>
+                }
             </div>
-            
+            {/* spacer */}
+            <div style={{height: 30}}></div>
+            {/* spacer */}
             <button 
                 style={styles.submit}
-                onClick={() => setIsSubmitting(true)}
+                onClick={() => {
+                    setIsSubmitting(true)
+                    setSubmissionCount(submissionCount + 1)
+                }}
             >Submit
             </button>
+            
             <p>Don't have an account? <span style={styles.link} onClick={() => setIsNewUser(true)}>Sign Up</span></p>
         </div>
     );

@@ -6,6 +6,12 @@ export const colors = {
     black: '#264653',
     beige: '#f5efe0',
     red: '#cd2653',
+    grey: '#aaaaaa',
+    warningYellow: '#f0ad4e',
+    errorRed: '#d9534f',
+    successGreen: '#5cb85c',
+    infoBlue: '#5bc0de',
+    opaqueBlack: 'rgba(0,0,0,0.1)',
 }
 
 export const fontSize = {
