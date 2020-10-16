@@ -41,7 +41,7 @@ const styles = {
     }
 }
 
-function SignInForm({ setIsNewUser }) {
+function SignInForm({ setIsNewUser, isAuthenticated, setIsAuthenticated }) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [isUsernameValid, setIsUsernameValid] = useState(false)
@@ -49,7 +49,8 @@ function SignInForm({ setIsNewUser }) {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submissionCount, setSubmissionCount] = useState(0)
     const [showAlert, setShowAlert] = useState(false)
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+    const history = useHistory()
 
     useEffect(() => {
         setIsUsernameValid(new RegExp(/^[a-zA-Z0-9]+$/)
@@ -60,6 +61,13 @@ function SignInForm({ setIsNewUser }) {
         setsPasswordValid(new RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
                         .test(password))
     }, [password]);
+    
+    useEffect(() => {
+        if(isAuthenticated) {
+            setIsAuthenticated(true)
+            history.push(_config.routes.home)
+        }
+    }, [isAuthenticated, setIsAuthenticated, history]);
     
     useEffect(() => {
         const handleSubmit = async () => {
@@ -75,7 +83,7 @@ function SignInForm({ setIsNewUser }) {
             }
             setIsSubmitting(false)
         }
-    }, [isSubmitting, isUsernameValid, isPasswordValid, username, password]);
+    }, [isSubmitting, isUsernameValid, isPasswordValid, username, password, setIsAuthenticated]);
 
     const handleCloseAlert = () => {
         setShowAlert(false)

@@ -9,7 +9,7 @@ import { device } from '../styles'
 
 
 
-function AppHeader({ title, navLinks }) {
+function AppHeader({ title, navLinks, isAuthenticated }) {
     const isMobile = useMediaQuery({ query: `(max-width: ${device.tablet})` })
     
     const styles = {
@@ -39,11 +39,11 @@ function AppHeader({ title, navLinks }) {
             {isMobile 
             ?
             <div style={styles.navBar}>
-                <HeaderNavBarMobile navLinks={navLinks} />
+                <HeaderNavBarMobile navLinks={navLinks} isAuthenticated={isAuthenticated} />
             </div>
             :
             <div style={styles.navBar}>
-                <HeaderNavBar navLinks={navLinks} />
+                <HeaderNavBar navLinks={navLinks} isAuthenticated={isAuthenticated} />
             </div>
             }
         </div>

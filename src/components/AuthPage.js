@@ -11,7 +11,7 @@ const styles = {
 }
 
 
-function AuthPage() {
+function AuthPage({ isAuthenticated, setIsAuthenticated }) {
   const [ isNewUser, setIsNewUser ] = useState(false);
     
   return (
@@ -19,8 +19,15 @@ function AuthPage() {
         <Page 
             title={isNewUser ? "Sign Up" : "Sign In"}
             child={isNewUser 
-                    ? <SignUpForm setIsNewUser={setIsNewUser}/> 
-                    : <SignInForm setIsNewUser={setIsNewUser}/>
+                    ? <SignUpForm 
+                        setIsNewUser={setIsNewUser}
+                        setIsAuthenticated={setIsAuthenticated}
+                      /> 
+                    : <SignInForm 
+                        setIsNewUser={setIsNewUser}
+                        isAuthenticated={isAuthenticated}
+                        setIsAuthenticated={setIsAuthenticated}
+                      />
                 }
         />
     </div>

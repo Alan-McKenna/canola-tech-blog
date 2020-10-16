@@ -25,15 +25,18 @@ const config = {
             createPost: "/blog/post/create",
             admin: "/admin",
             auth: "/auth",
+            logout: "/logout",
         },
         navLinks: [
-            { name: "Home", url: "/" },
-            { name: "About", url: "/about" },
-            { name: "Contact", url: "/contact" },
-            { name: "Blog", url: "/blog" },
+            { name: "Home", url: "/", protected: false },
+            { name: "About", url: "/about", protected: false },
+            { name: "Contact", url: "/contact", protected: false },
+            { name: "Blog", url: "/blog", protected: false },
+            { name: "Login", url: "/auth", protected: false },
             // for dev only
-            { name: "Create Post", url: "/blog/post/create" },
-            { name: "Admin", url: "/admin" },
+            { name: "Create Post", url: "/blog/post/create", protected: true },
+            { name: "Admin", url: "/admin", protected: true },
+            { name: "Logout", url: "/logout", protected: true },
         ]
     },
     production: {

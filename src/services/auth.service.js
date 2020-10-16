@@ -103,6 +103,12 @@ class AuthService {
       );
   }
 
+  logout() {
+    localStorage.removeItem("authTimeout");
+    localStorage.removeItem("username");
+    localStorage.removeItem("jwt");
+  }
+
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('username'));
   }

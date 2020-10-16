@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter,
   Switch,
   Route,
+  Redirect,
 } from "react-router-dom";
 
 import AppHeader from './AppHeader';
@@ -31,6 +32,8 @@ const styles = {
 }
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(AuthService.getIsAuthenticated())
+
   return (
     <BrowserRouter>
       <div className="app" style={styles.root}>
@@ -38,6 +41,7 @@ function App() {
         <AppHeader
           title={_config.headerTitle}
           navLinks={_config.navLinks}
+          isAuthenticated={isAuthenticated}
         />
 
         <Switch>
@@ -66,12 +70,21 @@ function App() {
             component={BlogPost}
           />
           <Route 
+            path={_config.routes.logout}
+            render={() => (<>{setIsAuthenticated(false)}{AuthService.logout()}<Redirect to={_config.routes.auth}/></>)}
+          />
+          <Route 
             path={_config.routes.auth}
-            component={AuthPage}
+            render={(props) => (
+              <AuthPage {...props} 
+                isAuthenticated={isAuthenticated} 
+                setIsAuthenticated={setIsAuthenticated}
+              />
+            )}
           />
           <ProtectedRoute
             exact path={_config.routes.admin}
-            isAuthenticated={AuthService.getIsAuthenticated()}
+            isAuthenticated={isAuthenticated}
             component={AdminDashboard}
           />
         </Switch>

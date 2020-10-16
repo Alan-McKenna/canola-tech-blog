@@ -7,7 +7,7 @@ import {
 import config from '../config'
 const _config = config[process.env.NODE_ENV];
 
-function ProtectedRoute({ component: Component, isAuthenticated, ...rest }) {
+const ProtectedRoute = ({ component: Component, isAuthenticated, ...rest }) => {
     return (
         <Route
             {...rest}

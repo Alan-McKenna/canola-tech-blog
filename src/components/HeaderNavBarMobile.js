@@ -23,7 +23,7 @@ const styles = {
     }
 }
 
-function HeaderNavBarMobile( { navLinks }) {
+function HeaderNavBarMobile( { navLinks, isAuthenticated }) {
     const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
     
 
@@ -42,14 +42,20 @@ function HeaderNavBarMobile( { navLinks }) {
         { isComponentVisible
         &&
         navLinks.map((navLink, index) => {
-            return (
-                <div key={index}>
-                    <HeaderNavLink
-                        setIsComponentVisible={setIsComponentVisible}
-                        navLink={navLink}
-                    />
-                </div>
-            )
+            if ((!navLink.protected && (navLink.name.toLowerCase() !=="login")) 
+                || (!isAuthenticated && (navLink.name.toLowerCase() ==="login")) 
+                || (navLink.protected && isAuthenticated)) {
+                return (
+                    <div key={index}>
+                        <HeaderNavLink
+                            setIsComponentVisible={setIsComponentVisible}
+                            navLink={navLink}
+                        />
+                    </div>
+                )
+            } else {
+                return (<span key={index}></span>)
+            }
         })
         }
     </div>

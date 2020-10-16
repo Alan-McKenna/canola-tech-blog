@@ -41,7 +41,7 @@ const styles = {
     }
 }
 
-function SignUpForm({ setIsNewUser }) {
+function SignUpForm({ setIsNewUser, setIsAuthenticated }) {
     const [email, setEmail] = useState("")
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -54,7 +54,6 @@ function SignUpForm({ setIsNewUser }) {
     const [isRegistered, setIsRegistered] = useState(false)
     
     const history = useHistory()
-    // history.push(_config.routes.admin)
 
     useEffect(() => {
         setIsEmailValid(new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
@@ -70,6 +69,13 @@ function SignUpForm({ setIsNewUser }) {
         setsPasswordValid(new RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
                         .test(password))
     }, [password]);
+
+    useEffect(() => {
+        if(isRegistered) {
+            setIsAuthenticated(true)
+            history.push(_config.routes.home)
+        }
+    }, [isRegistered, setIsAuthenticated, history]);
     
     useEffect(() => {
         const handleSubmit = async () => {

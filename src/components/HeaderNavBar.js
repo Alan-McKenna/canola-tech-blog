@@ -8,17 +8,23 @@ const styles = {
     }
 }
 
-function HeaderNavBar( { navLinks }) {
+function HeaderNavBar( { navLinks, isAuthenticated }) {
     
   return (
     <div className="header-nav-bar" style={styles.container}>
         {navLinks.map((navLink, index) => {
-            return (
-                <HeaderNavLink
-                    key={index}
-                    navLink={navLink}
-                />
-            )
+            if ((!navLink.protected && (navLink.name.toLowerCase() !=="login")) 
+                || (!isAuthenticated && (navLink.name.toLowerCase() ==="login")) 
+                || (navLink.protected && isAuthenticated)) {
+                return (
+                    <HeaderNavLink
+                        key={index}
+                        navLink={navLink}
+                    />
+                )
+            } else {
+                return (<span key={index}></span>)
+            }
         })
         }
     </div>

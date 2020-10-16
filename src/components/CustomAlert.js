@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useMediaQuery } from 'react-responsive'
 
-import { fontSize, colors } from '../styles'
+import { fontSize, colors, device } from '../styles'
 
 
 const styles = {
     dialogBox: {
-        width: '80%',
         zIndex: 1,
         margin: 'auto',
         padding: '2%',
@@ -21,8 +21,11 @@ const styles = {
 }
 
 function WarningAlert( { message }) {
+    const isTablet = useMediaQuery({ query: `(max-width: ${device.tablet})` })
+
     const warningStyles = {
         dialogBox: {
+            width: (isTablet ? '80%' : '30%'),
             backgroundColor: colors.warningYellow
         }
     }
@@ -35,8 +38,11 @@ function WarningAlert( { message }) {
 }
 
 function ErrorAlert( { message }) {
+    const isTablet = useMediaQuery({ query: `(max-width: ${device.tablet})` })
+    
     const errorStyles = {
         dialogBox: {
+            width: (isTablet ? '80%' : '30%'),
             backgroundColor: colors.errorRed
         }
     }
@@ -49,8 +55,11 @@ function ErrorAlert( { message }) {
 }
 
 function SuccessAlert( { message }) {
+    const isTablet = useMediaQuery({ query: `(max-width: ${device.tablet})` })
+    
     const successStyles = {
         dialogBox: {
+            width: (isTablet ? '80%' : '30%'),
             backgroundColor: colors.successGreen
         }
     }
@@ -63,8 +72,11 @@ function SuccessAlert( { message }) {
 }
 
 function InfoAlert( { message }) {
+    const isTablet = useMediaQuery({ query: `(max-width: ${device.tablet})` })
+    
     const infoStyles = {
         dialogBox: {
+            width: (isTablet ? '80%' : '30%'),
             backgroundColor: colors.infoBlue
         }
     }
@@ -77,6 +89,7 @@ function InfoAlert( { message }) {
 }
 
 function CustomAlert( { message, type, handleCloseAlert, timeout }) {
+    if(!timeout) timeout = 3000;
     const [closeHover, setCloseHover] = useState(false)
     
     const styles = {
@@ -104,7 +117,6 @@ function CustomAlert( { message, type, handleCloseAlert, timeout }) {
     }
 
     useEffect(() => {
-        if(!timeout) timeout = 3000;
         setTimeout(() => {
             handleCloseAlert()
         }, timeout);
