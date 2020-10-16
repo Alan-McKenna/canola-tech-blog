@@ -17,6 +17,7 @@ import CreatePost from './CreatePost';
 import AdminDashboard from './AdminDashboard';
 import ProtectedRoute from './ProtectedRoute';
 import AuthPage from './AuthPage';
+import Logout from './Logout';
 
 import AuthService from '../services/auth.service.js'
 import './App.css'
@@ -71,7 +72,7 @@ function App() {
           />
           <Route 
             path={_config.routes.logout}
-            render={() => (<>{setIsAuthenticated(false)}{AuthService.logout()}<Redirect to={_config.routes.auth}/></>)}
+            render={() => (<Logout setIsAuthenticated={setIsAuthenticated}/>)}
           />
           <Route 
             path={_config.routes.auth}
