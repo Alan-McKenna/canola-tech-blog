@@ -8,7 +8,7 @@ import SubmitButton from './SubmitButton'
 import AuthService from '../services/auth.service.js'
 import BlogPostService from '../services/blogPost.service.js'
 
-import { fontSize, colors } from '../styles'
+import { fontSize, colors, tooltip } from '../styles'
 
 const styles = {
   title: {
@@ -17,6 +17,13 @@ const styles = {
     border: 'none',
     width: '90%',
     textAlign: 'center'
+  },
+  tooltip: tooltip,
+  titleTooltip: {
+    width: '20%',
+    marginRight: '60%',
+    marginLeft: '20%',
+    position: 'relative',
   },
 }
 
@@ -32,6 +39,35 @@ function SaveAlert({ isSaveSuccessful, showAlert, setShowAlert }) {
         : !isSaveSuccessful && showAlert
         ? <CustomAlert message={`Failed to create post`} type={'error'} handleCloseAlert={handleCloseAlert}/>
         : <></>
+      }
+    </>
+  )
+}
+
+function CreatePostTitle({ setTitle, title, isWaiting }) {
+    const [showTooltip, setShowTooltip] = useState(false);
+    const firstUpdate = useRef(true);
+
+  useEffect(() => {
+    if (!firstUpdate.current && !title) {
+      setShowTooltip(true)
+    } else if (title) {
+      setShowTooltip(false)
+    }
+    firstUpdate.current = false;
+  }, [isWaiting, title]);
+
+  return (
+    <>
+      <textarea 
+        name="title" 
+        className="blog-post-title-input" 
+        placeholder="Title..."
+        style={styles.title}
+        onChange={(event) => setTitle(event.target.value)}
+      />
+      {showTooltip &&
+        <div style={{...styles.tooltip, ...styles.titleTooltip}}>Post must have a title</div>
       }
     </>
   )
@@ -54,32 +90,26 @@ function CreatePost() {
 
     async function handleSave() {
       setIsWaiting(true)
-      const savedData = await editorInstance.save();
-      const post = {
-          title: title,
-          author: AuthService.getCurrentUser(),
-          comments: [],
-          tags: [],
-          blocks: savedData.blocks,
-      }
-      const isSaveSuccessful = await BlogPostService.save(post)
+      if (title) {
+        const savedData = await editorInstance.save();
+        const post = {
+            title: title,
+            author: AuthService.getCurrentUser(),
+            comments: [],
+            tags: [],
+            blocks: savedData.blocks,
+        }
+        const isSaveSuccessful = await BlogPostService.save(post)
         setIsSaveSuccessful(isSaveSuccessful)
-      setIsWaiting(false)
+      }
+      setTimeout(() => {setIsWaiting(false)}, 1);
     }
 
     return (
       <div className="contact">
         <SaveAlert isSaveSuccessful={isSaveSuccessful} showAlert={showAlert} setShowAlert={setShowAlert}/>
         <Page 
-            title={
-              <textarea 
-                name="title" 
-                className="blog-post-title-input" 
-                placeholder="Title..."
-                style={styles.title}
-                onChange={(event) => setTitle(event.target.value)}
-              />
-            }
+            title={<CreatePostTitle setTitle={setTitle} title={title} isWaiting={isWaiting}/>}
             child={<PostEditor setEditorInstance={setEditorInstance}/>}
         />
         <SubmitButton isWaiting={isWaiting} handleSave={handleSave}/>

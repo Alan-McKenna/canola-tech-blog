@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import CustomAlert from './CustomAlert'
 
 import AuthService from '../services/auth.service.js'
-import { button, link, colors } from '../styles'
+import { button, link, tooltip } from '../styles'
 
 import config from '../config'
 const _config = config[process.env.NODE_ENV];
@@ -30,15 +30,7 @@ const styles = {
     },
     link: link,
     submit: button,
-    tooltip: {
-        textAlign: 'left',
-        position: 'absolute',
-        padding: 5,
-        margin: 5,
-        color: colors.white,
-        backgroundColor: colors.red,
-        borderRadius: '5px',
-    }
+    tooltip: tooltip
 }
 
 function SignInAlert({ isAuthenticated, showAlert, setShowAlert, username }) {

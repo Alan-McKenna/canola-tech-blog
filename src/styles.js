@@ -41,3 +41,14 @@ export const link = {
     cursor: 'pointer',
     textDecoration: 'underline'
 }
+
+export const tooltip = {
+    textAlign: 'left',
+    position: 'absolute',
+    padding: 5,
+    margin: 5,
+    color: colors.white,
+    backgroundColor: colors.red,
+    borderRadius: '5px',
+    fontSize: fontSize.small,
+}
