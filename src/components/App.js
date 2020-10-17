@@ -3,7 +3,6 @@ import {
   BrowserRouter,
   Switch,
   Route,
-  Redirect,
 } from "react-router-dom";
 
 import AppHeader from './AppHeader';
@@ -14,6 +13,7 @@ import Contact from './Contact';
 import Blog from './Blog';
 import BlogPost from './BlogPost';
 import CreatePost from './CreatePost';
+import UpdatePost from './UpdatePost';
 import AdminDashboard from './AdminDashboard';
 import ProtectedRoute from './ProtectedRoute';
 import AuthPage from './AuthPage';
@@ -65,6 +65,10 @@ function App() {
           <Route 
             exact path={_config.routes.createPost}
             component={CreatePost}
+          />
+          <Route 
+            exact path={_config.routes.updatePost}
+            component={UpdatePost}
           />
           <Route 
             path={`${_config.routes.post}/:postId/:title`}

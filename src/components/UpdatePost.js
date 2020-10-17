@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import PostEditor from './PostEditor';
 
 
-function CreatePost() {
+function UpdatePost() {
     const [title, setTitle] = useState("")
     const [content, setContent] = useState([])
     
@@ -17,4 +17,4 @@ function CreatePost() {
     );
   }
   
-export default CreatePost;
+export default UpdatePost;
