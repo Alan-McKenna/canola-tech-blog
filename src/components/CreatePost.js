@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Loader from 'react-loader-spinner'
 
 import Page from './Page'
 import PostEditor from './PostEditor'
 import CustomAlert from './CustomAlert'
+import SubmitButton from './SubmitButton'
 
 import AuthService from '../services/auth.service.js'
 import BlogPostService from '../services/blogPost.service.js'
 
-import { fontSize, colors, button } from '../styles'
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import { fontSize, colors } from '../styles'
 
 const styles = {
   title: {
@@ -19,12 +18,6 @@ const styles = {
     width: '90%',
     textAlign: 'center'
   },
-  button: button,
-  submitContainer: {
-    paddingBottom: 30,
-    backgroundColor: colors.beige,
-    textAlign: 'center',
-  }
 }
 
 function SaveAlert({ isSaveSuccessful, showAlert, setShowAlert }) {
@@ -41,21 +34,6 @@ function SaveAlert({ isSaveSuccessful, showAlert, setShowAlert }) {
         : <></>
       }
     </>
-  )
-}
-
-function SubmitButton({ isWaiting, handleSave }) {
-
-  return (
-    <div>
-      {isWaiting
-        ?   <Loader type="BallTriangle" color="#00BFFF" height={80} width={80} />
-        
-        :   <div onClick={() => handleSave()} style={styles.submitContainer}>
-                <input type="submit" value="Save" style={styles.button}/>
-            </div>
-        }
-    </div>
   )
 }
 
