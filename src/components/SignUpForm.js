@@ -41,6 +41,23 @@ const styles = {
     }
 }
 
+function SignUpAlert({ isRegistered, showAlert, setShowAlert, username }) {
+    const handleCloseAlert = () => {
+      setShowAlert(false)
+    }
+  
+    return (
+      <>
+        {showAlert && isRegistered
+            ? <CustomAlert message={`Successfully registered ${username}`} type={'success'} handleCloseAlert={handleCloseAlert}/>
+            : showAlert && !isRegistered
+            ? <CustomAlert message={`Failed to register ${username}`} type={'error'} handleCloseAlert={handleCloseAlert}/>
+            : <></>
+        }
+      </>
+    )
+}
+
 function SignUpForm({ setIsNewUser, setIsAuthenticated }) {
     const [email, setEmail] = useState("")
     const [username, setUsername] = useState("")
@@ -93,18 +110,11 @@ function SignUpForm({ setIsNewUser, setIsAuthenticated }) {
         }
     }, [isSubmitting, isEmailValid, isUsernameValid, isPasswordValid, username, email, password]);
 
-    const handleCloseAlert = () => {
-        setShowAlert(false)
-    }
-
+    
     return (
         <div id="sign-up-form" style={styles.container}>
-            {showAlert && isRegistered
-            ? <CustomAlert message={`Successfully registered ${username}`} type={'success'} handleCloseAlert={handleCloseAlert}/>
-            : showAlert && !isRegistered
-            ? <CustomAlert message={`Failed to register ${username}`} type={'error'} handleCloseAlert={handleCloseAlert}/>
-            : <></>
-            }
+            <SignUpAlert isRegistered={isRegistered} showAlert={showAlert} setShowAlert={setShowAlert} username={username}/>
+            
             <div style={styles.inputContainer}>
                 <label htmlFor="email">Email</label>
                 <input style={styles.inputField} type="email" onChange={(event) => setEmail(event.target.value)}/>

@@ -13,7 +13,7 @@ function Home() {
 
   useEffect(() => {
       async function fetchData() {
-          const _posts = await BlogPostService.get_posts(3)
+          const _posts = await BlogPostService.getPosts(3)
           setPosts(_posts)
       }
       fetchData();

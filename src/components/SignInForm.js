@@ -41,6 +41,23 @@ const styles = {
     }
 }
 
+function SignInAlert({ isAuthenticated, showAlert, setShowAlert, username }) {
+    const handleCloseAlert = () => {
+      setShowAlert(false)
+    }
+  
+    return (
+      <>
+        {showAlert && isAuthenticated
+            ? <CustomAlert message={`Successfully authenticated ${username}`} type={'success'} handleCloseAlert={handleCloseAlert}/>
+            : showAlert && !isAuthenticated
+            ? <CustomAlert message={`Failed to authenticate ${username}`} type={'error'} handleCloseAlert={handleCloseAlert}/>
+            : <></>
+        }
+      </>
+    )
+}
+
 function SignInForm({ setIsNewUser, isAuthenticated, setIsAuthenticated }) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -85,18 +102,10 @@ function SignInForm({ setIsNewUser, isAuthenticated, setIsAuthenticated }) {
         }
     }, [isSubmitting, isUsernameValid, isPasswordValid, username, password, setIsAuthenticated]);
 
-    const handleCloseAlert = () => {
-        setShowAlert(false)
-    }
 
     return (
         <div id="sign-up-form" style={styles.container}>
-            {showAlert && isAuthenticated
-            ? <CustomAlert message={`Successfully authenticated ${username}`} type={'success'} handleCloseAlert={handleCloseAlert}/>
-            : showAlert && !isAuthenticated
-            ? <CustomAlert message={`Failed to authenticate ${username}`} type={'error'} handleCloseAlert={handleCloseAlert}/>
-            : <></>
-            }
+            <SignInAlert isAuthenticated={isAuthenticated} showAlert={showAlert} setShowAlert={setShowAlert} username={username}/>
             <div style={styles.inputContainer}>
                 <label htmlFor="username">Username</label>
                 <input style={styles.inputField} type="text" onChange={(event) => setUsername(event.target.value)}/>

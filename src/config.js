@@ -33,10 +33,10 @@ const config = {
             { name: "Contact", url: "/contact", protected: false },
             { name: "Blog", url: "/blog", protected: false },
             { name: "Login", url: "/auth", protected: false },
-            // for dev only
-            { name: "Create Post", url: "/blog/post/create", protected: true },
-            { name: "Admin", url: "/admin", protected: true },
             { name: "Logout", url: "/logout", protected: true },
+            // for dev only
+            { name: "Admin", url: "/admin", protected: true },
+            { name: "Create Post", url: "/blog/post/create", protected: true },
         ]
     },
     production: {

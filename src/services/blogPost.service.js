@@ -76,7 +76,7 @@ class BlogPostService {
     }
   }
 
-  async get_post(postId) {
+  async getPost(postId) {
     var myHeaders = new Headers();
 
     var requestOptions = {
@@ -98,7 +98,7 @@ class BlogPostService {
     }
   }
 
-  async get_posts(limit) {
+  async getPosts(limit) {
     var myHeaders = new Headers();
 
     var requestOptions = {

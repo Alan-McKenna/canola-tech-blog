@@ -17,23 +17,21 @@ const styles = {
 }
 
 
-function PostEditor({ title }) {
+function PostEditor({ title, setIsSaveSuccessful }) {
     const [ editorInstance, setEditorInstance ] = useState("");
-    const [ isSaving, setIsSaving ] = useState(false);
-    
-    // const history = useHistory();
+    const [ isWaiting, setIsWaiting ] = useState(false);
 
     async function handleSave() {
-        setIsSaving(true)
+        setIsWaiting(true)
         const savedData = await editorInstance.save();
         const post = {
             title: title,
             tags: [],
             blocks: savedData.blocks,
         }
-        if(await BlogPostService.save(post)) {
-            setIsSaving(false)
-        }
+        const isSaveSuccessful = await BlogPostService.save(post)
+        setIsSaveSuccessful(isSaveSuccessful)
+        setIsWaiting(false)
     }
 
 
@@ -46,7 +44,7 @@ function PostEditor({ title }) {
             blocks: [],
             }}
         />
-        {isSaving
+        {isWaiting
         ?   <Loader type="BallTriangle" color="#00BFFF" height={80} width={80} />
         
         :   <div className="row"

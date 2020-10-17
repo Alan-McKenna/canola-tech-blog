@@ -11,7 +11,7 @@ function Blog() {
 
   useEffect(() => {
       async function fetchData() {
-          const _posts = await BlogPostService.get_posts(10)
+          const _posts = await BlogPostService.getPosts(10)
           setPosts(_posts)
       }
       fetchData();
