@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from "react-router-dom";
 
 import CustomAlert from './CustomAlert'
@@ -66,14 +66,14 @@ function SignUpForm({ setIsNewUser, setIsAuthenticated }) {
     const [isUsernameValid, setIsUsernameValid] = useState(false)
     const [isPasswordValid, setsPasswordValid] = useState(true)
     const [isSubmitting, setIsSubmitting] = useState(false)
-    const [submissionCount, setSubmissionCount] = useState(0)
     const [showAlert, setShowAlert] = useState(false)
     const [isRegistered, setIsRegistered] = useState(false)
+    const firstUpdate = useRef(true);
     
     const history = useHistory()
 
     useEffect(() => {
-        setIsEmailValid(new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+        setIsEmailValid(new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
                         .test(email))
     }, [email]);
 
@@ -107,10 +107,11 @@ function SignUpForm({ setIsNewUser, setIsAuthenticated }) {
             } else{
             }
             setIsSubmitting(false)
+            firstUpdate.current = false
         }
     }, [isSubmitting, isEmailValid, isUsernameValid, isPasswordValid, username, email, password]);
 
-    
+
     return (
         <div id="sign-up-form" style={styles.container}>
             <SignUpAlert isRegistered={isRegistered} showAlert={showAlert} setShowAlert={setShowAlert} username={username}/>
@@ -118,21 +119,21 @@ function SignUpForm({ setIsNewUser, setIsAuthenticated }) {
             <div style={styles.inputContainer}>
                 <label htmlFor="email">Email</label>
                 <input style={styles.inputField} type="email" onChange={(event) => setEmail(event.target.value)}/>
-                {!isEmailValid && submissionCount > 0 &&
+                {!isEmailValid && !firstUpdate.current &&
                     <div style={styles.tooltip}>Must be valid email</div>
                 }
             </div>
             <div style={styles.inputContainer}>
                 <label htmlFor="username">Username</label>
                 <input style={styles.inputField} type="text" onChange={(event) => setUsername(event.target.value)}/>
-                {!isUsernameValid && submissionCount > 0 &&
+                {!isUsernameValid && !firstUpdate.current &&
                     <div style={styles.tooltip}>Must only contain alphanumeric characters with no spaces</div>
                 }
             </div>
             <div style={styles.inputContainer}>
                 <label htmlFor="password">Password</label>
                 <input style={styles.inputField} type="password" onChange={(event) => setPassword(event.target.value)}/>
-                {!isPasswordValid && submissionCount > 0 &&
+                {!isPasswordValid && !firstUpdate.current &&
                     <div style={styles.tooltip}>Must contain at least one number and special character [!@#$%^&*]</div>
                 }
             </div>
@@ -141,10 +142,7 @@ function SignUpForm({ setIsNewUser, setIsAuthenticated }) {
             {/* spacer */}
             <button 
                 style={styles.submit}
-                onClick={() => {
-                    setIsSubmitting(true)
-                    setSubmissionCount(submissionCount + 1)
-                }}
+                onClick={() => setIsSubmitting(true)}
             >Submit
             </button>
             

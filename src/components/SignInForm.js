@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from "react-router-dom";
 
 import CustomAlert from './CustomAlert'
@@ -64,8 +64,8 @@ function SignInForm({ setIsNewUser, isAuthenticated, setIsAuthenticated }) {
     const [isUsernameValid, setIsUsernameValid] = useState(false)
     const [isPasswordValid, setsPasswordValid] = useState(true)
     const [isSubmitting, setIsSubmitting] = useState(false)
-    const [submissionCount, setSubmissionCount] = useState(0)
     const [showAlert, setShowAlert] = useState(false)
+    const firstUpdate = useRef(true);
 
     const history = useHistory()
 
@@ -99,6 +99,7 @@ function SignInForm({ setIsNewUser, isAuthenticated, setIsAuthenticated }) {
             } else{
             }
             setIsSubmitting(false)
+            firstUpdate.current = false
         }
     }, [isSubmitting, isUsernameValid, isPasswordValid, username, password, setIsAuthenticated]);
 
@@ -109,14 +110,14 @@ function SignInForm({ setIsNewUser, isAuthenticated, setIsAuthenticated }) {
             <div style={styles.inputContainer}>
                 <label htmlFor="username">Username</label>
                 <input style={styles.inputField} type="text" onChange={(event) => setUsername(event.target.value)}/>
-                {!isUsernameValid && submissionCount > 0 &&
+                {!isUsernameValid && !firstUpdate.current &&
                     <div style={styles.tooltip}>Must only contain alphanumeric characters with no spaces</div>
                 }
             </div>
             <div style={styles.inputContainer}>
                 <label htmlFor="password">Password</label>
                 <input style={styles.inputField} type="password" onChange={(event) => setPassword(event.target.value)}/>
-                {!isPasswordValid && submissionCount > 0 &&
+                {!isPasswordValid && !firstUpdate.current &&
                     <div style={styles.tooltip}>Must contain at least one number and special character [!@#$%^&*]</div>
                 }
             </div>
@@ -125,10 +126,7 @@ function SignInForm({ setIsNewUser, isAuthenticated, setIsAuthenticated }) {
             {/* spacer */}
             <button 
                 style={styles.submit}
-                onClick={() => {
-                    setIsSubmitting(true)
-                    setSubmissionCount(submissionCount + 1)
-                }}
+                onClick={() => setIsSubmitting(true)}
             >Submit
             </button>
             
