@@ -69,18 +69,10 @@ function CreatePost() {
 
     useEffect(() => {
       if (!firstUpdate.current) {
-        console.log(`isSaveSuccessful=${isSaveSuccessful}`)
         setShowAlert(true)
       }
       firstUpdate.current = false;
     }, [firstUpdate, isSaveSuccessful]);
-
-    useEffect(() => {
-        console.log(`title=${title}`)
-    }, [title]);
-    useEffect(() => {
-        console.log(`isSaveSuccessful=${isSaveSuccessful}`)
-    }, [isSaveSuccessful]);
 
     async function handleSave() {
       setIsWaiting(true)
@@ -93,7 +85,6 @@ function CreatePost() {
           blocks: savedData.blocks,
       }
       const isSaveSuccessful = await BlogPostService.save(post)
-        console.log(`isSaveSuccessful=${isSaveSuccessful}`)
         setIsSaveSuccessful(isSaveSuccessful)
       setIsWaiting(false)
     }
