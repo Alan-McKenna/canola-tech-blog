@@ -61,6 +61,7 @@ function PostTitleInput({ setTitle, title, isWaiting }) {
     <>
       <textarea 
         name="title" 
+        value={title}
         className="blog-post-title-input" 
         placeholder="Title..."
         style={styles.title}
@@ -78,7 +79,7 @@ function PostEditor({ title, setTitle, content }) {
     const [showAlert, setShowAlert] = useState(false)
     const [isWaiting, setIsWaiting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [editorInstance, setEditorInstance] = useState("");
+    const [editorInstance, setEditorInstance] = useState(null);
     const firstUpdate = useRef(true);
 
     useEffect(() => {

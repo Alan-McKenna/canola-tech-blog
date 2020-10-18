@@ -67,7 +67,7 @@ function App() {
             component={CreatePost}
           />
           <Route 
-            exact path={_config.routes.updatePost}
+            exact path={`${_config.routes.updatePost}/:postId`}
             component={UpdatePost}
           />
           <Route 

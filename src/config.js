@@ -22,7 +22,8 @@ const config = {
             contact: "/contact",
             blog:"/blog",
             post: "/blog/post",
-            createPost: "/blog/post/create",
+            createPost: "/create/blog/post",
+            updatePost: "/update/blog/post",
             admin: "/admin",
             auth: "/auth",
             logout: "/logout",
@@ -36,7 +37,7 @@ const config = {
             { name: "Logout", url: "/logout", protected: true },
             // for dev only
             { name: "Admin", url: "/admin", protected: true },
-            { name: "Create Post", url: "/blog/post/create", protected: true },
+            { name: "Create Post", url: "/create/blog/post", protected: true },
         ]
     },
     production: {

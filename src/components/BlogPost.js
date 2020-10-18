@@ -54,7 +54,7 @@ function BlogPost() {
 
     useEffect(() => {
         async function fetchData() {
-            const _post = await BlogPostService.get_post(postId)
+            const _post = await BlogPostService.getPost(postId)
             setDate(_post.date)
             setAuthor(_post.author)
             setContent(_post.content)
