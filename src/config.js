@@ -36,6 +36,11 @@ const config = {
             // for dev only
             { name: "Admin", url: "/admin", protected: true },
             { name: "Create Post", url: "/create/blog/post", protected: true },
+        ],
+        adminToolbarLinks: [
+            { name: "Dashboard", url: "/admin" },
+            { name: "Posts", url: "/admin/posts" },
+            { name: "New Post", url: "/create/blog/post" },
         ]
     },
     production: {

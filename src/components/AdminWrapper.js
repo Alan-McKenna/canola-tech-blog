@@ -1,8 +1,13 @@
 import React from 'react';
 
+import ToolbarNavLink from './ToolbarNavLink'
+
 import { colors } from '../styles'
 
-function AdminToolbar({ component: Component, ...props }) {
+import config from '../config'
+const _config = config[process.env.NODE_ENV];
+
+function AdminToolbar({ navLinks }) {
     
   const styles = {
     toolbar: {
@@ -15,7 +20,15 @@ function AdminToolbar({ component: Component, ...props }) {
 
   return (
     <div className={'toolbar'} style={styles.toolbar}>
-
+        {navLinks.map((navLink, index) => {
+            return (
+                <ToolbarNavLink
+                    key={index}
+                    navLink={navLink}
+                />
+            )
+        })
+        }
     </div>
   );
 }
@@ -25,8 +38,8 @@ function AdminWrapper({ component: Component, ...props }) {
   const styles = {
     container: {
         display: 'grid',
-        gridTemplateColumns: '100px auto',
-        gridTemplateRows: '100vh',
+        gridTemplateColumns: '120px auto',
+        gridTemplateRows: 'minmax(100vh, 100%)',
     },
     content: {
       gridColumn: '2',
@@ -35,7 +48,7 @@ function AdminWrapper({ component: Component, ...props }) {
 
   return (
     <div style={styles.container}>
-      <AdminToolbar/>
+      <AdminToolbar navLinks={_config.adminToolbarLinks}/>
 
       <div className={'admin-page-content'} style={styles.content}>
         <Component {...props} /> 
