@@ -16,7 +16,7 @@ import CreatePost from './CreatePost';
 import UpdatePost from './UpdatePost';
 import AdminRoute from './AdminRoute';
 import AdminDashboard from './AdminDashboard';
-import ProtectedRoute from './ProtectedRoute';
+import AdminPostsView from './AdminPostsView';
 import AuthPage from './AuthPage';
 import Logout from './Logout';
 
@@ -63,16 +63,6 @@ function App() {
             exact path={_config.routes.blog}
             component={Blog}
           />
-          <AdminRoute 
-            exact path={_config.routes.createPost}
-            isAuthenticated={isAuthenticated}
-            component={CreatePost}
-          />
-          <AdminRoute 
-            exact path={`${_config.routes.updatePost}/:postId`}
-            isAuthenticated={isAuthenticated}
-            component={UpdatePost}
-          />
           <Route 
             path={`${_config.routes.post}/:postId/:title`}
             component={BlogPost}
@@ -94,6 +84,21 @@ function App() {
             exact path={_config.routes.admin}
             isAuthenticated={isAuthenticated}
             component={AdminDashboard}
+          />
+          <AdminRoute 
+            exact path={_config.routes.createPost}
+            isAuthenticated={isAuthenticated}
+            component={CreatePost}
+          />
+          <AdminRoute 
+            exact path={`${_config.routes.updatePost}/:postId`}
+            isAuthenticated={isAuthenticated}
+            component={UpdatePost}
+          />
+          <AdminRoute
+            exact path={_config.routes.adminPosts}
+            isAuthenticated={isAuthenticated}
+            component={AdminPostsView}
           />
         </Switch>
 

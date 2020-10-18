@@ -24,6 +24,7 @@ const config = {
             post: "/blog/post",
             createPost: "/create/blog/post",
             updatePost: "/update/blog/post",
+            adminPosts: "/admin/blog/posts",
             admin: "/admin",
             auth: "/auth",
             logout: "/logout",
@@ -35,11 +36,10 @@ const config = {
             { name: "Blog", url: "/blog", protected: false },
             // for dev only
             { name: "Admin", url: "/admin", protected: true },
-            { name: "Create Post", url: "/create/blog/post", protected: true },
         ],
         adminToolbarLinks: [
             { name: "Dashboard", url: "/admin" },
-            { name: "Posts", url: "/admin/posts" },
+            { name: "Posts", url: "/admin/blog/posts" },
             { name: "New Post", url: "/create/blog/post" },
         ]
     },
