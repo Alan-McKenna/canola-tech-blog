@@ -23,8 +23,7 @@ function ToolbarNavLink( { navLink }) {
             backgroundSize: '200% 100%',
         },
         onHover: {
-            backgroundPosition: '-100% 0'// (hover ? colors.opaqueBlack : colors.red),
-
+            backgroundPosition: '-100% 0'
         }
     }
 
