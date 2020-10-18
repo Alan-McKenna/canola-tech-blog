@@ -14,6 +14,7 @@ import Blog from './Blog';
 import BlogPost from './BlogPost';
 import CreatePost from './CreatePost';
 import UpdatePost from './UpdatePost';
+import AdminWrapper from './AdminWrapper';
 import AdminDashboard from './AdminDashboard';
 import ProtectedRoute from './ProtectedRoute';
 import AuthPage from './AuthPage';
@@ -62,13 +63,15 @@ function App() {
             exact path={_config.routes.blog}
             component={Blog}
           />
-          <Route 
+          <ProtectedRoute 
             exact path={_config.routes.createPost}
-            component={CreatePost}
+            isAuthenticated={isAuthenticated}
+            component={() => (<AdminWrapper component={CreatePost}/>)}
           />
-          <Route 
+          <ProtectedRoute 
             exact path={`${_config.routes.updatePost}/:postId`}
-            component={UpdatePost}
+            isAuthenticated={isAuthenticated}
+            component={() => (<AdminWrapper component={UpdatePost}/>)}
           />
           <Route 
             path={`${_config.routes.post}/:postId/:title`}
@@ -90,7 +93,7 @@ function App() {
           <ProtectedRoute
             exact path={_config.routes.admin}
             isAuthenticated={isAuthenticated}
-            component={AdminDashboard}
+            component={() => (<AdminWrapper component={AdminDashboard}/>)}
           />
         </Switch>
 

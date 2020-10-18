@@ -1,15 +1,21 @@
 import React from 'react';
 
-import { button } from '../styles'
-
-const styles = {
-}
-
+import { colors } from '../styles'
 
 function AdminDashboard() {
     
+  const styles = {
+    container: {
+        display: 'grid',
+        gridTemplateColumns: '100px auto',
+        minHeight: '100vh',
+        width: '100%',
+    }
+  }
+
   return (
-    <div>
+    <div style={styles.container}>
+      
     </div>
   );
 }

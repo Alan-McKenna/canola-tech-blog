@@ -2,7 +2,6 @@ import React from 'react';
 import { useMediaQuery } from 'react-responsive'
 
 import HeaderTitle from './HeaderTitle'
-import HeaderNavBar from './HeaderNavBar'
 import HeaderNavBarCompressed from './HeaderNavBarCompressed'
 import HeaderNavLink from './HeaderNavLink'
 
