@@ -36,7 +36,7 @@ function AppHeader({ title, navLinks, isAuthenticated }) {
         container: {
             height: '8vh',
             display: 'grid',
-            gridTemplateColumns: '20% auto 50px',
+            gridTemplateColumns: '40% auto 50px',
             boxShadow: (isMobile ? '0' : '0 5px 5px 0 rgba(0, 0, 0, 0.1)'),
             verticalAlign: 'middle'
         },
