@@ -41,7 +41,7 @@ function App() {
         
         <AppHeader
           title={_config.headerTitle}
-          navLinks={_config.navLinks}
+          navLinks={_config.navBarLinks}
           isAuthenticated={isAuthenticated}
         />
 

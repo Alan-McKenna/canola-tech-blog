@@ -28,13 +28,11 @@ const config = {
             auth: "/auth",
             logout: "/logout",
         },
-        navLinks: [
+        navBarLinks: [
             { name: "Home", url: "/", protected: false },
             { name: "About", url: "/about", protected: false },
             { name: "Contact", url: "/contact", protected: false },
             { name: "Blog", url: "/blog", protected: false },
-            { name: "Login", url: "/auth", protected: false },
-            { name: "Logout", url: "/logout", protected: true },
             // for dev only
             { name: "Admin", url: "/admin", protected: true },
             { name: "Create Post", url: "/create/blog/post", protected: true },

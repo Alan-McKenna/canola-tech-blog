@@ -10,7 +10,9 @@ const styles = {
         textAlign: 'right',
     },
     expandedContainer: {
-        position: 'relative',
+        position: 'fixed',
+        top: '0',
+        left: '0',
         width: '100vw',
         textAlign: 'right',
         backgroundColor: colors.white,
@@ -23,7 +25,7 @@ const styles = {
     }
 }
 
-function HeaderNavBarMobile( { navLinks, isAuthenticated }) {
+function HeaderNavBarCompressed( { navLinks, isAuthenticated }) {
     const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
     
 
@@ -62,4 +64,4 @@ function HeaderNavBarMobile( { navLinks, isAuthenticated }) {
   );
 }
 
-export default HeaderNavBarMobile;
+export default HeaderNavBarCompressed;
