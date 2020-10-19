@@ -12,7 +12,7 @@ function ToolbarNavLink( { navLink }) {
             textDecorationColor: 'none',
             color: colors.white,
             backgroundImage: `linear-gradient(to right, ${colors.red} 50%, ${colors.opaqueBlack} 50%)`,
-            transition: 'background-position 0.5s',
+            transition: 'background-position 0.3s',
             fontSize: fontSize.medium,
             display: 'inline-block',
             paddingTop: 30,
