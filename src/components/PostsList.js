@@ -9,7 +9,7 @@ import config from '../config'
 const _config = config[process.env.NODE_ENV];
 
 
-function RemovePrompt({ post, removePostFromList, setShowRemovePrompt }) {
+function RemovePrompt({ post, removePostFromList, showRemovePrompt, setShowRemovePrompt }) {
     const [hover, setHover] = useState(false)
     
     const styles = {
@@ -58,7 +58,8 @@ function RemovePrompt({ post, removePostFromList, setShowRemovePrompt }) {
         },
     }
 
-    const handleRemove = () => {
+    const handleRemove = (post) => {
+        console.log(post)
         const removePost = async () => {
             const result = await BlogPostService.delete(post._id)
             if(result) removePostFromList(post)
@@ -67,7 +68,13 @@ function RemovePrompt({ post, removePostFromList, setShowRemovePrompt }) {
         removePost()
     }
 
+    useEffect(() => {
+        console.log(`post=${post.title}`)
+    },[post.title])
+
     return (
+    <>{showRemovePrompt ? 
+        
         <div style={styles.container} >
             <div style={styles.promtContainer} >
                 <div style={styles.message}>Are you sure you want to remove "{post.title}"?</div>
@@ -75,17 +82,20 @@ function RemovePrompt({ post, removePostFromList, setShowRemovePrompt }) {
                     <div style={styles.noButton} onClick={() => setShowRemovePrompt(false)}>No</div>
                     <div 
                         style={styles.yesButton} 
-                        onClick={() => handleRemove()}
+                        onClick={() => handleRemove(post)}
                         onMouseEnter={() => setHover(true)}
                         onMouseLeave={() => setHover(false)}
                     >Yes</div>
                 </div>
             </div>
         </div>
+    
+    : <></> }</>
     )
 }
 
-function PostListItem({ post, setShowRemovePrompt }) {
+function PostListItem({ post, removePostFromList }) {
+    const [showRemovePrompt, setShowRemovePrompt] = useState(false)
     const [containerHover, setContainerHover] = useState(false)
     const [updateHover, setUpdateHover] = useState(false)
     const [removeHover, setRemoveHover] = useState(false)
@@ -170,6 +180,13 @@ function PostListItem({ post, setShowRemovePrompt }) {
     }
     
     return (
+        <>
+        <RemovePrompt 
+            post={post}
+            removePostFromList={removePostFromList}
+            setShowRemovePrompt={setShowRemovePrompt}
+            showRemovePrompt={showRemovePrompt}
+        />
         <div 
             style={styles.container}
             onClick={(e) => handleGoTo(e)}
@@ -195,24 +212,15 @@ function PostListItem({ post, setShowRemovePrompt }) {
             </span>
 
         </div>
+        </>
     )
 }
 
 function PostsList({ posts, removePostFromList }) {
-    const [remove, setRemove] = useState(false)
-    const [showRemovePrompt, setShowRemovePrompt] = useState(false)
-    const [counter, setCounter] = useState(0)
-    
     const styles = {
         container: {
         }
     }
-
-    useEffect(() => {
-        setCounter(counter + 1)
-        console.log(`counter=${counter}`)
-        console.log(`posts=${posts.length}`)
-    },[posts])
 
     return (
         <div style={styles.container}>
@@ -220,19 +228,8 @@ function PostsList({ posts, removePostFromList }) {
                 posts.map(function(post, index){
                     return (
                     <div  key={index} >
-                        {showRemovePrompt && 
-                            <RemovePrompt 
-                                post={post}
-                                removePostFromList={removePostFromList}
-                                setShowRemovePrompt={setShowRemovePrompt}
-                            />
-                        }
-
                         <PostListItem 
                             post={post}
-                            remove={remove}
-                            setRemove={setRemove}
-                            setShowRemovePrompt={setShowRemovePrompt}
                             removePostFromList={removePostFromList}
                         />
                     </div>

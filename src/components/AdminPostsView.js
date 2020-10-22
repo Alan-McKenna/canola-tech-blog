@@ -31,7 +31,7 @@ function AdminPostsView() {
       }, [firstUpdate]);
 
     const removePostFromList = (post) => {
-        const _posts = posts.filter( _post => !(_post._id === post._id))
+        const _posts = posts.filter(_post => !(_post._id === post._id))
         setPosts(_posts)
     }
 
