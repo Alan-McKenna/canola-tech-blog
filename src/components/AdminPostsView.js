@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 
 import Page from './Page'
 import PostsList from './PostsList'
@@ -13,27 +13,33 @@ const _config = config[process.env.NODE_ENV];
 
 
 function AdminPostsView() {
-    const [ posts, setPosts ] = useState([]);
-  
+    const firstUpdate = useRef(true);
+    const [posts, setPosts] = useState([]);
+    
+    const styles = {
+        container: {
+        }
+    }
+
     useEffect(() => {
         async function fetchData() {
             const _posts = await BlogPostService.getPosts(10)
             setPosts(_posts)
         }
-        fetchData();
-      }, []);
+        if(firstUpdate.current) fetchData();
+        firstUpdate.current = false
+      }, [firstUpdate]);
 
-
-    const styles = {
-    container: {
+    const removePostFromList = (post) => {
+        const _posts = posts.filter( _post => !(_post._id === post._id))
+        setPosts(_posts)
     }
-  }
 
     return (
         <div style={styles.container}>
         <Page
             title={adminPostsView.title}
-            child={<PostsList posts={posts} />}
+            child={<PostsList posts={posts} removePostFromList={removePostFromList} />}
         />
         </div>
     );

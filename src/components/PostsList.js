@@ -9,7 +9,7 @@ import config from '../config'
 const _config = config[process.env.NODE_ENV];
 
 
-function RemovePrompt({ post, handleRemove, handleClose }) {
+function RemovePrompt({ post, removePostFromList, setShowRemovePrompt }) {
     const [hover, setHover] = useState(false)
     
     const styles = {
@@ -58,14 +58,24 @@ function RemovePrompt({ post, handleRemove, handleClose }) {
         },
     }
 
+    const handleRemove = () => {
+        const removePost = async () => {
+            const result = await BlogPostService.delete(post._id)
+            if(result) removePostFromList(post)
+        }
+        setShowRemovePrompt(false)
+        removePost()
+    }
+
     return (
         <div style={styles.container} >
             <div style={styles.promtContainer} >
                 <div style={styles.message}>Are you sure you want to remove "{post.title}"?</div>
                 <div>
-                    <div style={styles.noButton} onClick={() => handleClose()}>No</div>
+                    <div style={styles.noButton} onClick={() => setShowRemovePrompt(false)}>No</div>
                     <div 
-                        style={styles.yesButton} onClick={() => handleRemove()}
+                        style={styles.yesButton} 
+                        onClick={() => handleRemove()}
                         onMouseEnter={() => setHover(true)}
                         onMouseLeave={() => setHover(false)}
                     >Yes</div>
@@ -75,7 +85,7 @@ function RemovePrompt({ post, handleRemove, handleClose }) {
     )
 }
 
-function PostListItem({ post, setShowRemovePrompt, remove }) {
+function PostListItem({ post, setShowRemovePrompt }) {
     const [containerHover, setContainerHover] = useState(false)
     const [updateHover, setUpdateHover] = useState(false)
     const [removeHover, setRemoveHover] = useState(false)
@@ -143,13 +153,6 @@ function PostListItem({ post, setShowRemovePrompt, remove }) {
         },
     }
 
-    useEffect(() => {
-        if(remove) {
-            console.log("remove service called")
-            // BlogPostService.delete(post._id)
-        }
-    }, [remove, post._id])
-
     const handleGoTo = (e) => {
         e.stopPropagation();
         history.push(`${_config.routes.post}/${post._id}/${post.title}`)
@@ -195,23 +198,21 @@ function PostListItem({ post, setShowRemovePrompt, remove }) {
     )
 }
 
-function PostsList({ posts }) {
+function PostsList({ posts, removePostFromList }) {
     const [remove, setRemove] = useState(false)
     const [showRemovePrompt, setShowRemovePrompt] = useState(false)
+    const [counter, setCounter] = useState(0)
     
     const styles = {
         container: {
         }
     }
 
-    const handlePromtRemoveOption = () => {
-        setRemove(true)
-        setShowRemovePrompt(false)
-    }
-
-    const handlePromtNoRemoveOption = () => {
-        setShowRemovePrompt(false)
-    }
+    useEffect(() => {
+        setCounter(counter + 1)
+        console.log(`counter=${counter}`)
+        console.log(`posts=${posts.length}`)
+    },[posts])
 
     return (
         <div style={styles.container}>
@@ -219,9 +220,21 @@ function PostsList({ posts }) {
                 posts.map(function(post, index){
                     return (
                     <div  key={index} >
-                        {showRemovePrompt && <RemovePrompt post={post} handleRemove={handlePromtRemoveOption} handleClose={handlePromtNoRemoveOption}/>}
+                        {showRemovePrompt && 
+                            <RemovePrompt 
+                                post={post}
+                                removePostFromList={removePostFromList}
+                                setShowRemovePrompt={setShowRemovePrompt}
+                            />
+                        }
 
-                        <PostListItem post={post} remove={remove} setShowRemovePrompt={setShowRemovePrompt}/>
+                        <PostListItem 
+                            post={post}
+                            remove={remove}
+                            setRemove={setRemove}
+                            setShowRemovePrompt={setShowRemovePrompt}
+                            removePostFromList={removePostFromList}
+                        />
                     </div>
                     )
                 }

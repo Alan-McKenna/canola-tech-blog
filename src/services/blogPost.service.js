@@ -56,11 +56,13 @@ class BlogPostService {
 
   async delete(postId) {
     var myHeaders = new Headers();
+    myHeaders.append("Authorization", 'Bearer ' + AuthService.getJwt());
+    myHeaders.append("Content-Type", "application/json");
 
     var requestOptions = {
       method: blog_service.delete.method,
       headers: myHeaders,
-      redirect: 'follow',
+      redirect: 'follow'
     };
     const url = `${baseUrl}${blog_service.delete.route}/${postId}` 
     try {
