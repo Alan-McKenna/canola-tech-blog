@@ -51,6 +51,7 @@ function BlogPost({ isAuthenticated }) {
     const [ content, setContent ] = useState([]);
     const [ author, setAuthor ] = useState("");
     const [ date, setDate ] = useState("");
+    const [ comments, setComments ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(false);
 
     useEffect(() => {
@@ -59,6 +60,7 @@ function BlogPost({ isAuthenticated }) {
             setDate(_post.date)
             setAuthor(_post.author)
             setContent(_post.content)
+            setComments(_post.comments)
         }
         setIsLoading(true)
         fetchData();
@@ -85,8 +87,8 @@ function BlogPost({ isAuthenticated }) {
                 </div>
             </div>
 
-            <CommentsSection isAuthenticated={isAuthenticated} />
-            
+            <CommentsSection comments={comments} isAuthenticated={isAuthenticated} />
+
         </div>
     );
 }

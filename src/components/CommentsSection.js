@@ -5,16 +5,13 @@ import { useMediaQuery } from 'react-responsive'
 
 import NewComment from './NewComment'
 import Comment from './Comment'
-import BlogPostService from '../services/blogPost.service.js'
 import { colors, fontSize, device } from '../styles'
 
 
-function CommentsSection({ isAuthenticated }) {
+function CommentsSection({ comments, isAuthenticated }) {
     const isTablet = useMediaQuery({ query: `(max-width: ${device.tablet})` })
 
-    const [comments, setComments] = useState([])
     const { postId } = useParams();
-    const firstUpdate = useRef(true);
 
     const styles = {
         container: {
@@ -26,19 +23,6 @@ function CommentsSection({ isAuthenticated }) {
           padding: 10,
         }
     }
-
-
-    useEffect(() => {
-        async function fetchData() {
-            const postComments = await BlogPostService.getComments(postId)
-            setComments(postComments)
-        }
-        if(firstUpdate.current){
-            fetchData()
-        }
-        firstUpdate.current = false
-      }, [postId]);
-
 
     return (
         <div className="comments-section" style={styles.container}>
