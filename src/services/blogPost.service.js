@@ -33,6 +33,8 @@ class BlogPostService {
 
   async update(postId, post) {
     var myHeaders = new Headers();
+    myHeaders.append("Authorization", 'Bearer ' + AuthService.getJwt());
+    myHeaders.append("Content-Type", "application/json");
 
     var requestOptions = {
       method: blog_service.put.method,

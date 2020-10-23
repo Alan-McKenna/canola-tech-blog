@@ -27,7 +27,7 @@ const styles = {
   },
 }
 
-function SaveAlert({ isSaveSuccessful, showAlert, setShowAlert }) {
+function SubmitAlert({ isSaveSuccessful, showAlert, setShowAlert }) {
   const handleCloseAlert = () => {
     setShowAlert(false)
   }
@@ -35,9 +35,9 @@ function SaveAlert({ isSaveSuccessful, showAlert, setShowAlert }) {
   return (
     <>
       {isSaveSuccessful && showAlert
-        ? <CustomAlert message={`Successfully created post`} type={'success'} handleCloseAlert={handleCloseAlert}/>
+        ? <CustomAlert message={`Successfully saved post`} type={'success'} handleCloseAlert={handleCloseAlert}/>
         : !isSaveSuccessful && showAlert
-        ? <CustomAlert message={`Failed to create post`} type={'error'} handleCloseAlert={handleCloseAlert}/>
+        ? <CustomAlert message={`Failed to saved post`} type={'error'} handleCloseAlert={handleCloseAlert}/>
         : <></>
       }
     </>
@@ -74,7 +74,7 @@ function PostTitleInput({ setTitle, title, isWaiting }) {
   )
 }
 
-function PostEditor({ title, setTitle, content }) {
+function PostEditor({ title, setTitle, content, role, postId}) {
     const [isSaveSuccessful, setIsSaveSuccessful] = useState(false);
     const [showAlert, setShowAlert] = useState(false)
     const [isWaiting, setIsWaiting] = useState(false);
@@ -107,14 +107,37 @@ function PostEditor({ title, setTitle, content }) {
       setTimeout(() => {setIsWaiting(false)}, 1);
     }
 
+    async function handleUpdate() {
+      setIsWaiting(true)
+      if (title) {
+        const savedData = await editorInstance.save();
+        const post = {
+            title: title,
+            author: AuthService.getCurrentUser(),
+            comments: [],
+            tags: [],
+            blocks: savedData.blocks,
+        }
+        const isSaveSuccessful = await BlogPostService.update(postId, post)
+        setIsSubmitted(!isSubmitted)
+        setIsSaveSuccessful(isSaveSuccessful)
+      }
+      setTimeout(() => {setIsWaiting(false)}, 1);
+    }
+
     return (
       <div className="contact">
-        <SaveAlert isSaveSuccessful={isSaveSuccessful} showAlert={showAlert} setShowAlert={setShowAlert}/>
+        <SubmitAlert isSaveSuccessful={isSaveSuccessful} showAlert={showAlert} setShowAlert={setShowAlert}/>
         <Page 
             title={<PostTitleInput setTitle={setTitle} title={title} isWaiting={isWaiting}/>}
             child={<TextEditor setEditorInstance={setEditorInstance} blocks={content}/>}
         />
-        <SubmitButton isWaiting={isWaiting} handleSave={handleSave}/>
+        {role && role.toLowerCase() === 'update' 
+        ? <SubmitButton isWaiting={isWaiting} handleSubmit={handleUpdate} value={"Update"}/>
+        : role && role.toLowerCase() === 'create' 
+        ? <SubmitButton isWaiting={isWaiting} handleSubmit={handleSave} value={"Save"}/>
+        : <SubmitButton isWaiting={isWaiting} handleSubmit={handleSave} value={"Save"}/>
+        }
       </div>
     );
   }

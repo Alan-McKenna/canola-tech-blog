@@ -25,6 +25,8 @@ function UpdatePost() {
             setTitle={setTitle}
             content={content}
             setContent={setContent}
+            role={'update'}
+            postId={postId}
         />
     );
   }

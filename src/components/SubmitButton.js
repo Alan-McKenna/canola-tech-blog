@@ -16,7 +16,7 @@ const styles = {
     }
   }
 
-function SubmitButton({ isWaiting, handleSave }) {
+function SubmitButton({ isWaiting, handleSubmit, value }) {
     return (
         <div>
         {isWaiting
@@ -28,8 +28,8 @@ function SubmitButton({ isWaiting, handleSave }) {
                     style={styles.submitContainer}
                 />
             
-            :   <div onClick={() => handleSave()} style={styles.submitContainer}>
-                    <input type="submit" value="Save" style={styles.button}/>
+            :   <div onClick={() => handleSubmit()} style={styles.submitContainer}>
+                    <input type="submit" value={(value ? value : "Submit")} style={styles.button}/>
                 </div>
             }
         </div>
