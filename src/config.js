@@ -8,6 +8,8 @@ const config = {
             post: {route: "/post", method: "POST" },
             put: {route: "/post", method: "PUT" },
             delete: {route: "/post", method: "DELETE" },
+            getComments: {route: "/post/comments", method: "GET" },
+            submitComment: {route: "/post/comments", method: "POST" },
         },
         auth_service: { 
             protocol: "http://",

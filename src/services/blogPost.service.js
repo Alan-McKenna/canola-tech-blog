@@ -121,6 +121,52 @@ class BlogPostService {
       return []
     }
   }
+
+  async getComments(postId, limit) {
+    return []
+    // var myHeaders = new Headers();
+
+    // var requestOptions = {
+    //   method: blog_service.get.method,
+    //   headers: myHeaders,
+    //   redirect: 'follow',
+    // };
+    // const url = `${baseUrl}${blog_service.getComments.route}` + (postId ? `?postId=${postId}` : ``) + (limit ? `&limit=${limit}` : ``) 
+    // try {
+    //   const response = await fetch(url, requestOptions)
+    //   if (response.status === 200) {
+    //     const res = await response.json()
+    //     return res.comments
+    //   }
+    //   return []
+    // } catch (e) {
+    //   console.log('error', e);
+    //   return []
+    // }
+  }
+
+  async submitComment({postId, content, author}) {
+    return true
+    // var myHeaders = new Headers();
+
+    // var requestOptions = {
+    //   method: blog_service.get.method,
+    //   headers: myHeaders,
+    //   redirect: 'follow',
+    // };
+    // const url = `${baseUrl}${blog_service.submitComment.route}` + (postId ? `?postId=${postId}` : ``) + (limit ? `&limit=${limit}` : ``) 
+    // try {
+    //   const response = await fetch(url, requestOptions)
+    //   if (response.status === 200) {
+    //     const res = await response.json()
+    //     return res.comments
+    //   }
+    //   return []
+    // } catch (e) {
+    //   console.log('error', e);
+    //   return []
+    // }
+  }
 }
 
 export default new BlogPostService();

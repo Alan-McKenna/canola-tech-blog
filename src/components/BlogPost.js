@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive'
 import Loader from 'react-loader-spinner'
 
+import CommentsSection from './CommentsSection'
 import BlogPostContent from './BlogPostContent'
 import BlogPostMeta from './BlogPostMeta'
 import BlogPostService from '../services/blogPost.service.js'
@@ -11,7 +12,7 @@ import { colors, fontSize, device } from '../styles'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
 
-function BlogPost() {
+function BlogPost({ isAuthenticated }) {
     const isTablet = useMediaQuery({ query: `(max-width: ${device.tablet})` })
     
     const styles = {
@@ -83,6 +84,9 @@ function BlogPost() {
                     <BlogPostContent content={content}/>
                 </div>
             </div>
+
+            <CommentsSection isAuthenticated={isAuthenticated} />
+            
         </div>
     );
 }

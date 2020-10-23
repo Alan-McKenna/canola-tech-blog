@@ -65,7 +65,9 @@ function App() {
           />
           <Route 
             path={`${_config.routes.post}/:postId/:title`}
-            component={BlogPost}
+            render={(props) => (
+              <BlogPost {...props} isAuthenticated={isAuthenticated}/>
+            )}
           />
           <Route 
             path={_config.routes.logout}
