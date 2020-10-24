@@ -20,8 +20,10 @@ function NewComment({ postId, isAuthenticated }) {
         content: {
             fontSize: fontSize.medium,
             width: '100%',
-            height: '150px',
+            minHeight: '150px',
             resize: 'vertical',
+            border: '1px solid black',
+            borderRadius: '5px',
         },
         button: { ...button,
             width: '80px',

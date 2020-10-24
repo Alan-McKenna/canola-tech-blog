@@ -9,6 +9,8 @@ import { colors, fontSize, device } from '../styles'
 function Comment({ author, date, content, likesCount }) {
     const isTablet = useMediaQuery({ query: `(max-width: ${device.tablet})` })
 
+    const [isLiked, setIsLiked] = useState(false)
+
     const styles = {
         container: {
             border: '1px solid black',
@@ -47,7 +49,9 @@ function Comment({ author, date, content, likesCount }) {
             height: '20px',
             width: '20px',
             display: 'inline',
-            // margin: '10px',
+            cursor: 'pointer',
+            transform: (isLiked ? 'scale(1.75)' : 'scale(1)'),
+            transition: 'all .1s ease-in-out',
         },
         likeCounter: {
             backgroundColor: colors.offWhite,
@@ -60,7 +64,15 @@ function Comment({ author, date, content, likesCount }) {
         reply: {
             gridColumn: '2',
             textAlign: 'right',
+            color: colors.red,
+            fontWeight: 'bold',
+            cursor: 'pointer',
         },
+    }
+
+    const handleLikeClick = () => {
+        setIsLiked(true)
+        setTimeout(() => {setIsLiked(false)}, 1000);
     }
 
     return (
@@ -72,7 +84,12 @@ function Comment({ author, date, content, likesCount }) {
             <div className="comment-content" style={styles.content}>{content}</div>
             <div className="comment-actions-container" style={styles.actionsContainer}>
                 <div className="comment-actions-like" style={styles.like}>
-                    <img src={likeIcon} alt="LikeIcon"  style={styles.likeIcon} />
+                    <img 
+                        src={likeIcon}
+                        alt="LikeIcon"
+                        style={styles.likeIcon}
+                        onClick={() => handleLikeClick()}
+                    />
                     <span style={styles.likeCounter}>{likesCount ? likesCount : 0}</span>
                 </div>
                 <div className="comment-actions-reply" style={styles.reply}>reply</div>

@@ -17,6 +17,7 @@ function CommentsSection({ comments, isAuthenticated }) {
         container: {
             display: 'grid',
             gridTemplateColumns: '30% 40% 30%',
+            marginBottom: '50px',
         },
         content: {
           gridColumn: '2',
