@@ -35,6 +35,7 @@ const config = {
             { name: "About", url: "/about", protected: false },
             { name: "Contact", url: "/contact", protected: false },
             { name: "Blog", url: "/blog", protected: false },
+            { name: "Profile", url: "/profile", protected: true },
             // for dev only
             { name: "Admin", url: "/admin", protected: true },
         ],
