@@ -59,16 +59,9 @@ function AppHeader({ title, navLinks, isAuthenticated }) {
 
             <AuthHeader isAuthenticated={isAuthenticated} />
             
-            {isMobile 
-            ?
             <div style={styles.navBar}>
                 <HeaderNavBarCompressed navLinks={navLinks} isAuthenticated={isAuthenticated} />
             </div>
-            :
-            <div style={styles.navBar}>
-                <HeaderNavBarCompressed navLinks={navLinks} isAuthenticated={isAuthenticated} />
-            </div>
-            }
         </div>
     );
 }

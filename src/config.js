@@ -28,6 +28,7 @@ const config = {
             admin: "/admin",
             auth: "/auth",
             logout: "/logout",
+            profile: "/profile",
         },
         navBarLinks: [
             { name: "Home", url: "/", protected: false },

@@ -14,6 +14,8 @@ import Blog from './Blog';
 import BlogPost from './BlogPost';
 import CreatePost from './CreatePost';
 import UpdatePost from './UpdatePost';
+import UserProfile from './UserProfile';
+import ProtectedRoute from './ProtectedRoute';
 import AdminRoute from './AdminRoute';
 import AdminDashboard from './AdminDashboard';
 import AdminPostsView from './AdminPostsView';
@@ -81,6 +83,12 @@ function App() {
                 setIsAuthenticated={setIsAuthenticated}
               />
             )}
+          />
+          <ProtectedRoute 
+              exact path={_config.routes.profile}
+              isAuthenticated={isAuthenticated}
+              component={() => (<UserProfile isAuthenticated={isAuthenticated} />)
+            }
           />
           <AdminRoute
             exact path={_config.routes.admin}
