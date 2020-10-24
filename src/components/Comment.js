@@ -2,10 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useMediaQuery } from 'react-responsive'
 import moment from 'moment'
 
+import likeIcon from '../like-icon.png'; 
 import { colors, fontSize, device } from '../styles'
 
 
-function Comment({ author, date, content }) {
+function Comment({ author, date, content, likesCount }) {
     const isTablet = useMediaQuery({ query: `(max-width: ${device.tablet})` })
 
     const styles = {
@@ -14,7 +15,7 @@ function Comment({ author, date, content }) {
             borderRadius: '5px',
             padding: '10px',
             marginTop:  '30px',
-            marginBottom:  '30px',
+            // marginBottom:  '10px',
         },
         metaContainer: {
             display: 'grid',
@@ -30,7 +31,35 @@ function Comment({ author, date, content }) {
             textAlign: 'right',
         },
         content: {
-            marginBottom:  '20px',
+            marginBottom:  '30px',
+        },
+        actionsContainer: {
+            display: 'grid',
+            gridTemplateColumns: '50% 50%',
+            gridTemplateRows: 'minmax(30px, 100%)',
+            width: '100%',
+        },
+        like: {
+            gridColumn: '1',
+            display: 'inline',
+        },
+        likeIcon: {
+            height: '20px',
+            width: '20px',
+            display: 'inline',
+            // margin: '10px',
+        },
+        likeCounter: {
+            backgroundColor: colors.offWhite,
+            padding: '5px 7px 5px 7px',
+            border: '0.5px',
+            borderRadius: '5px',
+            display: 'inline',
+            margin: '10px',
+        },
+        reply: {
+            gridColumn: '2',
+            textAlign: 'right',
         },
     }
 
@@ -41,6 +70,13 @@ function Comment({ author, date, content }) {
                 <div className="comment-meta" style={styles.date}>{moment(date).format('MMMM DD YYYY')}</div>
             </div>
             <div className="comment-content" style={styles.content}>{content}</div>
+            <div className="comment-actions-container" style={styles.actionsContainer}>
+                <div className="comment-actions-like" style={styles.like}>
+                    <img src={likeIcon} alt="LikeIcon"  style={styles.likeIcon} />
+                    <span style={styles.likeCounter}>{likesCount ? likesCount : 0}</span>
+                </div>
+                <div className="comment-actions-reply" style={styles.reply}>reply</div>
+            </div>
         </div>
     );
 }
