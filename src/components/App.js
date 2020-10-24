@@ -36,7 +36,8 @@ const styles = {
 }
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(AuthService.getIsAuthenticated())
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
 
   return (
     <BrowserRouter>
@@ -81,6 +82,7 @@ function App() {
               <AuthPage {...props} 
                 isAuthenticated={isAuthenticated} 
                 setIsAuthenticated={setIsAuthenticated}
+                setIsAdmin={setIsAdmin}
               />
             )}
           />

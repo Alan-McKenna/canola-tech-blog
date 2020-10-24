@@ -1,5 +1,7 @@
 import config from '../config'
 
+import jwt_decode from "jwt-decode";
+
 const auth_service = config[process.env.NODE_ENV].auth_service;
 const baseUrl = `${auth_service.protocol}${auth_service.domain}`;
 
@@ -23,12 +25,13 @@ class AuthService {
         localStorage.setItem("jwt", JSON.stringify(res.jwt));
         localStorage.setItem("username", JSON.stringify(username));
         localStorage.setItem("authTimeout", this.getTimeTomorrow());
-        return true;
+        const isAdmin = await this.isAdmin(res.jwt)
+        return { isAuthenticated: true, isAdmin: isAdmin };
       }
-      return false
+      return { isAuthenticated: false, isAdmin: false };
     } catch (e) {
       console.log('error', e);
-      return false
+      return { isAuthenticated: false, isAdmin: false };
     }
   }
 
@@ -49,12 +52,18 @@ class AuthService {
       const response = await fetch(`${baseUrl}/${auth_service.register.route}`, requestOptions)
       const res = await response.json()
       if (res.status === 200) {
-        return true
+        if (res.jwt) {
+          localStorage.setItem("jwt", JSON.stringify(res.jwt));
+          localStorage.setItem("username", JSON.stringify(username));
+          localStorage.setItem("authTimeout", this.getTimeTomorrow());
+          const isAdmin = await this.isAdmin(res.jwt)
+          return { isRegistered: true, isAdmin: isAdmin };
+        }
       }
-      return false
+      return { isRegistered: false, isAdmin: false };
     } catch (e) {
       console.log('error', e);
-      return false
+      return { isRegistered: false, isAdmin: false };
     }
   }
 
@@ -69,7 +78,6 @@ class AuthService {
       redirect: 'follow'
     };
     try {
-      debugger
       const response = await fetch(`${baseUrl}/${auth_service.checkJwt.route}/${jwt}`, requestOptions)
       const res = await response.json()
       if (res.status === 200) {
@@ -81,6 +89,13 @@ class AuthService {
       console.log('error', e);
       return false
     }
+  }
+
+
+  async isAdmin(jwt) {
+    const decodedJwt = jwt_decode(jwt)
+    if(decodedJwt.role.toLowerCase() === "admin") return true
+    return false
   }
 
   getTimeNow() {
@@ -96,9 +111,9 @@ class AuthService {
     return JSON.parse(localStorage.getItem('authTimeout'));
   }
 
-  getIsAuthenticated() {
+  getIsAdmin() {
     return (
-      JSON.parse(localStorage.getItem('username')) !== null 
+      JSON.parse(localStorage.getItem('isAdmin')) !== null 
       && (this.getAuthTimeout() > this.getTimeNow())
       );
   }
@@ -106,6 +121,7 @@ class AuthService {
   logout() {
     localStorage.removeItem("authTimeout");
     localStorage.removeItem("username");
+    localStorage.removeItem("isAdmin");
     localStorage.removeItem("jwt");
   }
 

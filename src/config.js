@@ -15,6 +15,7 @@ const config = {
             login: {route: "/token", method: "POST" },
             register: {route: "/user", method: "POST" },
             checkJwt: {route: "/token", method: "GET" },
+            getPublicKey: {route: "/key", method: "GET" },
         },
         routes: { 
             home: "/" ,

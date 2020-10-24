@@ -50,7 +50,7 @@ function SignInAlert({ isAuthenticated, showAlert, setShowAlert, username }) {
     )
 }
 
-function SignInForm({ setIsNewUser, isAuthenticated, setIsAuthenticated }) {
+function SignInForm({ setIsNewUser, isAuthenticated, setIsAuthenticated, setIsAdmin }) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [isUsernameValid, setIsUsernameValid] = useState(false)
@@ -80,8 +80,9 @@ function SignInForm({ setIsNewUser, isAuthenticated, setIsAuthenticated }) {
     
     useEffect(() => {
         const handleSubmit = async () => {
-            const _isAuthenticated = await AuthService.login(username, password)
-            setIsAuthenticated(_isAuthenticated)
+            const {isAuthenticated, isAdmin} = await AuthService.login(username, password)
+            setIsAuthenticated(isAuthenticated)
+            setIsAdmin(isAdmin)
             setShowAlert(true)
         }
         
@@ -93,7 +94,7 @@ function SignInForm({ setIsNewUser, isAuthenticated, setIsAuthenticated }) {
             setIsSubmitting(false)
             firstUpdate.current = false
         }
-    }, [isSubmitting, isUsernameValid, isPasswordValid, username, password, setIsAuthenticated]);
+    }, [isSubmitting, isUsernameValid, isPasswordValid, username, password, setIsAuthenticated, setIsAdmin]);
 
 
     return (
