@@ -65,8 +65,12 @@ function BlogPost({ isAuthenticated }) {
         setIsLoading(true)
         fetchData();
         setIsLoading(false)
-      }, [postId, title]);
+      }, [postId, title])
 
+
+    const addCommentToList = (comment) => {
+        setComments([...comments, comment])
+    }
 
     return (
         <div className="post" style={styles.container}>
@@ -87,7 +91,7 @@ function BlogPost({ isAuthenticated }) {
                 </div>
             </div>
 
-            <CommentsSection comments={comments} isAuthenticated={isAuthenticated} />
+            <CommentsSection comments={comments} isAuthenticated={isAuthenticated} addCommentToList={addCommentToList} />
 
         </div>
     );

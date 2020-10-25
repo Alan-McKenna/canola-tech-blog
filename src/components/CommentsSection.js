@@ -8,7 +8,7 @@ import Comment from './Comment'
 import { colors, fontSize, device } from '../styles'
 
 
-function CommentsSection({ comments, isAuthenticated }) {
+function CommentsSection({ comments, isAuthenticated, addCommentToList }) {
     const isTablet = useMediaQuery({ query: `(max-width: ${device.tablet})` })
 
     const { postId } = useParams();
@@ -29,7 +29,7 @@ function CommentsSection({ comments, isAuthenticated }) {
         <div className="comments-section" style={styles.container}>
             <div style={styles.content}>
 
-                <NewComment postId={postId} isAuthenticated={isAuthenticated}/>
+                <NewComment postId={postId} isAuthenticated={isAuthenticated} addCommentToList={addCommentToList} />
 
                 {Array.isArray(comments) && comments[0] &&
                     comments.map(function(comment, index){
