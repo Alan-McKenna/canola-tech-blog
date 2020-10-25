@@ -47,6 +47,7 @@ function App() {
           title={_config.headerTitle}
           navLinks={_config.navBarLinks}
           isAuthenticated={isAuthenticated}
+          isAdmin={isAdmin}
         />
 
         <Switch>
@@ -95,21 +96,25 @@ function App() {
           <AdminRoute
             exact path={_config.routes.admin}
             isAuthenticated={isAuthenticated}
+            isAdmin={isAdmin}
             component={AdminDashboard}
           />
           <AdminRoute 
             exact path={_config.routes.createPost}
             isAuthenticated={isAuthenticated}
+            isAdmin={isAdmin}
             component={CreatePost}
           />
           <AdminRoute 
             exact path={`${_config.routes.updatePost}/:postId`}
             isAuthenticated={isAuthenticated}
+            isAdmin={isAdmin}
             component={UpdatePost}
           />
           <AdminRoute
             exact path={_config.routes.adminPosts}
             isAuthenticated={isAuthenticated}
+            isAdmin={isAdmin}
             component={AdminPostsView}
           />
         </Switch>
