@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   BrowserRouter,
   Switch,
@@ -37,6 +37,21 @@ const styles = {
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
+  const unmounted = useRef(false)
+
+  useEffect(() => {
+    const checkIsAdmin = async () => {
+      return await AuthService.isAdmin(await AuthService.getJwt())
+    }
+
+    if(isAuthenticated){
+      checkIsAdmin().then( _isAdmin => {
+        setIsAdmin(_isAdmin)
+      })
+    }
+    return () => { unmounted.current = true }
+  }, [isAuthenticated])
 
   return (
     <BrowserRouter>
@@ -93,21 +108,25 @@ function App() {
           <AdminRoute
             exact path={_config.routes.admin}
             isAuthenticated={isAuthenticated}
+            isAdmin={isAdmin}
             component={AdminDashboard}
           />
           <AdminRoute 
             exact path={_config.routes.createPost}
             isAuthenticated={isAuthenticated}
+            isAdmin={isAdmin}
             component={CreatePost}
           />
           <AdminRoute 
             exact path={`${_config.routes.updatePost}/:postId`}
             isAuthenticated={isAuthenticated}
+            isAdmin={isAdmin}
             component={UpdatePost}
           />
           <AdminRoute
             exact path={_config.routes.adminPosts}
             isAuthenticated={isAuthenticated}
+            isAdmin={isAdmin}
             component={AdminPostsView}
           />
         </Switch>

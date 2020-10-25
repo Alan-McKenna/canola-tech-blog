@@ -69,6 +69,7 @@ function SignUpForm({ setIsNewUser, setIsAuthenticated, setIsAdmin }) {
     const [showAlert, setShowAlert] = useState(false)
     const [isRegistered, setIsRegistered] = useState(false)
     const firstUpdate = useRef(true);
+    const unmounted = useRef(false);
     
     const history = useHistory()
 
@@ -102,7 +103,7 @@ function SignUpForm({ setIsNewUser, setIsAuthenticated, setIsAdmin }) {
             setShowAlert(true)
         }
         
-        if(isSubmitting) {
+        if(unmounted.current && isSubmitting) {
             if(isEmailValid && isUsernameValid && isPasswordValid) {
                 handleSubmit()
             } else{
@@ -110,6 +111,7 @@ function SignUpForm({ setIsNewUser, setIsAuthenticated, setIsAdmin }) {
             setIsSubmitting(false)
             firstUpdate.current = false
         }
+        return () => { unmounted.current = true }
     }, [isSubmitting, isEmailValid, isUsernameValid, isPasswordValid, username, email, password, setIsAdmin]);
 
 

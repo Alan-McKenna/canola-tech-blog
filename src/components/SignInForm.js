@@ -58,7 +58,7 @@ function SignInForm({ setIsNewUser, isAuthenticated, setIsAuthenticated }) {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [showAlert, setShowAlert] = useState(false)
     const firstUpdate = useRef(true);
-    const isMountedRef = useRef(null);
+    const unmounted = useRef(false);
 
     const history = useHistory()
 
@@ -80,21 +80,20 @@ function SignInForm({ setIsNewUser, isAuthenticated, setIsAuthenticated }) {
     }, [isAuthenticated, setIsAuthenticated, history]);
     
     useEffect(() => {
-        isMountedRef.current = true
         const handleSubmit = async () => {
             const {isAuthenticated, isAdmin} = await AuthService.login(username, password)
             setIsAuthenticated(isAuthenticated)
             setShowAlert(true)
         }
         
-        if(isMountedRef.current && isSubmitting) {
+        if(unmounted.current && isSubmitting) {
             if(isUsernameValid && isPasswordValid) {
                 handleSubmit()
             }
             setIsSubmitting(false)
             firstUpdate.current = false
         }
-        return () => isMountedRef.current = false
+        return () => { unmounted.current = true }
     }, [isSubmitting, isUsernameValid, isPasswordValid, username, password, setIsAuthenticated]);
 
 
