@@ -17,7 +17,6 @@ function Comment({ author, date, content, likesCount }) {
             borderRadius: '5px',
             padding: '10px',
             marginTop:  '30px',
-            // marginBottom:  '10px',
         },
         metaContainer: {
             display: 'grid',

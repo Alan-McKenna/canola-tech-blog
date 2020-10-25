@@ -16,7 +16,7 @@ function CommentsSection({ comments, isAuthenticated, addCommentToList }) {
     const styles = {
         container: {
             display: 'grid',
-            gridTemplateColumns: '30% 40% 30%',
+            gridTemplateColumns: (isTablet ? '5% 90% 5%' : '30% 40% 30%'),
             marginBottom: '50px',
         },
         content: {
