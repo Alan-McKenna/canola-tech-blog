@@ -58,7 +58,7 @@ function SignUpAlert({ isRegistered, showAlert, setShowAlert, username }) {
     )
 }
 
-function SignUpForm({ setIsNewUser, setIsAuthenticated, setIsAdmin }) {
+function SignUpForm({ setIsNewUser, setIsAuthenticated }) {
     const [email, setEmail] = useState("")
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -97,9 +97,8 @@ function SignUpForm({ setIsNewUser, setIsAuthenticated, setIsAdmin }) {
     
     useEffect(() => {
         const handleSubmit = async () => {
-            const { isRegistered, isAdmin } = await AuthService.register(username, email, password)
+            const { isRegistered } = await AuthService.register(username, email, password)
             setIsRegistered(isRegistered)
-            setIsAdmin(isAdmin)
             setShowAlert(true)
         }
         
@@ -112,7 +111,7 @@ function SignUpForm({ setIsNewUser, setIsAuthenticated, setIsAdmin }) {
             firstUpdate.current = false
         }
         return () => { unmounted.current = true }
-    }, [isSubmitting, isEmailValid, isUsernameValid, isPasswordValid, username, email, password, setIsAdmin]);
+    }, [isSubmitting, isEmailValid, isUsernameValid, isPasswordValid, username, email, password]);
 
 
     return (

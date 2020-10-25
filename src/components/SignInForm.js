@@ -81,7 +81,7 @@ function SignInForm({ setIsNewUser, isAuthenticated, setIsAuthenticated }) {
     
     useEffect(() => {
         const handleSubmit = async () => {
-            const {isAuthenticated, isAdmin} = await AuthService.login(username, password)
+            const { isAuthenticated } = await AuthService.login(username, password)
             setIsAuthenticated(isAuthenticated)
             setShowAlert(true)
         }
