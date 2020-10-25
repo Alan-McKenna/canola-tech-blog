@@ -11,7 +11,7 @@ const styles = {
 }
 
 
-function AuthPage({ isAuthenticated, setIsAuthenticated, setIsAdmin }) {
+function AuthPage({ isAuthenticated, setIsAuthenticated }) {
   const [ isNewUser, setIsNewUser ] = useState(false);
     
   return (
@@ -22,13 +22,11 @@ function AuthPage({ isAuthenticated, setIsAuthenticated, setIsAdmin }) {
                     ? <SignUpForm 
                         setIsNewUser={setIsNewUser}
                         setIsAuthenticated={setIsAuthenticated}
-                        setIsAdmin={setIsAdmin}
                       /> 
                     : <SignInForm 
                         setIsNewUser={setIsNewUser}
                         isAuthenticated={isAuthenticated}
                         setIsAuthenticated={setIsAuthenticated}
-                        setIsAdmin={setIsAdmin}
                       />
                 }
         />

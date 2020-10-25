@@ -50,7 +50,7 @@ function SignInAlert({ isAuthenticated, showAlert, setShowAlert, username }) {
     )
 }
 
-function SignInForm({ setIsNewUser, isAuthenticated, setIsAuthenticated, setIsAdmin }) {
+function SignInForm({ setIsNewUser, isAuthenticated, setIsAuthenticated }) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [isUsernameValid, setIsUsernameValid] = useState(false)
@@ -58,6 +58,7 @@ function SignInForm({ setIsNewUser, isAuthenticated, setIsAuthenticated, setIsAd
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [showAlert, setShowAlert] = useState(false)
     const firstUpdate = useRef(true);
+    const isMountedRef = useRef(null);
 
     const history = useHistory()
 
@@ -79,22 +80,22 @@ function SignInForm({ setIsNewUser, isAuthenticated, setIsAuthenticated, setIsAd
     }, [isAuthenticated, setIsAuthenticated, history]);
     
     useEffect(() => {
+        isMountedRef.current = true
         const handleSubmit = async () => {
             const {isAuthenticated, isAdmin} = await AuthService.login(username, password)
             setIsAuthenticated(isAuthenticated)
-            setIsAdmin(isAdmin)
             setShowAlert(true)
         }
         
-        if(isSubmitting) {
+        if(isMountedRef.current && isSubmitting) {
             if(isUsernameValid && isPasswordValid) {
                 handleSubmit()
-            } else{
             }
             setIsSubmitting(false)
             firstUpdate.current = false
         }
-    }, [isSubmitting, isUsernameValid, isPasswordValid, username, password, setIsAuthenticated, setIsAdmin]);
+        return () => isMountedRef.current = false
+    }, [isSubmitting, isUsernameValid, isPasswordValid, username, password, setIsAuthenticated]);
 
 
     return (
