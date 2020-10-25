@@ -25,7 +25,7 @@ const styles = {
     }
 }
 
-function HeaderNavBarCompressed( { navLinks, isAuthenticated }) {
+function HeaderNavBarCompressed( { navLinks, isAuthenticated, isAdmin }) {
     const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
     
 
@@ -44,9 +44,10 @@ function HeaderNavBarCompressed( { navLinks, isAuthenticated }) {
         { isComponentVisible
         &&
         navLinks.map((navLink, index) => {
-            if ((!navLink.protected && (navLink.name.toLowerCase() !=="login")) 
-                || (!isAuthenticated && (navLink.name.toLowerCase() ==="login")) 
+            if ((!navLink.protected && (navLink.name.toLowerCase() !== "login")) 
+                || (!isAuthenticated && (navLink.name.toLowerCase() === "login")) 
                 || (navLink.protected && isAuthenticated)) {
+                    
                 return (
                     <div key={index}>
                         <HeaderNavLink

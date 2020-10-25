@@ -28,7 +28,7 @@ function AuthHeader({ isAuthenticated }) {
     );
 }
 
-function AppHeader({ title, navLinks, isAuthenticated }) {
+function AppHeader({ title, navLinks, isAuthenticated, isAdmin }) {
     const isMobile = useMediaQuery({ query: `(max-width: ${device.tablet})` })
     
     const styles = {

@@ -61,7 +61,8 @@ function App() {
           title={_config.headerTitle}
           navLinks={_config.navBarLinks}
           isAuthenticated={isAuthenticated}
-        />
+          isAdmin={isAdmin}
+          />
 
         <Switch>
           <Route 
