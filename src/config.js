@@ -17,6 +17,11 @@ const config = {
             checkJwt: {route: "/token", method: "GET" },
             getPublicKey: {route: "/key", method: "GET" },
         },
+        contact_service: { 
+            protocol: "http://",
+            domain: "alanmckenna.site",
+            send: {route: "/send", method: "POST" },
+        },
         routes: { 
             home: "/" ,
             about: "/about",
