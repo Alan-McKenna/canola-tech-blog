@@ -27,6 +27,7 @@ function NewComment({ postId, isAuthenticated, addCommentToList }) {
             borderRadius: '5px',
             transform: (isSubmitted ? 'scale(1.1)' : 'scale(1)'),
             transition: 'all 0.5s ease-out',
+            cursor: (!isAuthenticated && 'not-allowed'),
         },
         button: { ...button,
             width: '80px',

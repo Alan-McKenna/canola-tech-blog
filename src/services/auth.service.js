@@ -68,8 +68,9 @@ class AuthService {
   }
 
 
-  async checkJwt(jwt) {
+  async checkJwt() {
     var myHeaders = new Headers();
+    myHeaders.append("Authorization", 'Bearer ' + this.getJwt());
     myHeaders.append("Content-Type", "application/json");
 
     var requestOptions = {
@@ -78,10 +79,9 @@ class AuthService {
       redirect: 'follow'
     };
     try {
-      const response = await fetch(`${baseUrl}/${auth_service.checkJwt.route}/${jwt}`, requestOptions)
+      const response = await fetch(`${baseUrl}${auth_service.checkJwt.route}`, requestOptions)
       const res = await response.json()
       if (res.status === 200) {
-        localStorage.setItem("username", JSON.stringify(res.decoded_jwt.username));
         return true;
       }
       return false
@@ -93,9 +93,12 @@ class AuthService {
 
 
   async isAdmin(jwt) {
-    const decodedJwt = jwt_decode(jwt)
-    if(decodedJwt.role.toLowerCase() === "admin") return true
-    return false
+    try {
+      const decodedJwt = jwt_decode(jwt)
+      if(decodedJwt.role.toLowerCase() === "admin") return true
+    } catch(ex) {
+      return false
+    }
   }
 
   getTimeNow() {

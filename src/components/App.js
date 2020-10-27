@@ -38,19 +38,28 @@ const styles = {
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
-  const unmounted = useRef(false)
+  // const unmounted = useRef(false)
 
   useEffect(() => {
     const checkIsAdmin = async () => {
-      return await AuthService.isAdmin(await AuthService.getJwt())
+      const _isAdmin = await AuthService.isAdmin(AuthService.getJwt())
+      setIsAdmin(_isAdmin)
+      return _isAdmin
+    }
+    const checkJwt = async () => {
+      const _isAuthenticated = await AuthService.checkJwt()
+      setIsAuthenticated(_isAuthenticated)
+      return _isAuthenticated
+    }
+
+    if(!isAuthenticated){
+      checkJwt()
     }
 
     if(isAuthenticated){
-      checkIsAdmin().then( _isAdmin => {
-        setIsAdmin(_isAdmin)
-      })
+      checkIsAdmin()
     }
-    return () => { unmounted.current = true }
+    // return () => { unmounted.current = true }
   }, [isAuthenticated])
 
   return (
