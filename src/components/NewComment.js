@@ -36,12 +36,12 @@ function NewComment({ postId, isAuthenticated, addCommentToList }) {
             margin: 'auto',
             transform: (isSubmitted ? 'scale(1.1)' : 'scale(1)'),
             transition: 'all 0.5s ease-out',
-            cursor: (isAuthenticated ? 'pointer' : 'not-allowed'),
+            cursor: ((isAuthenticated && content) ? 'pointer' : 'not-allowed'),
         },
     }
 
     const submitComment = async () => {
-        if(isAuthenticated) {
+        if(isAuthenticated && content) {
             const author = AuthService.getCurrentUser()
             const comment = { 
                 author:  (author ? author : "Anonymous"),

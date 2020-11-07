@@ -3,20 +3,26 @@ import { useMediaQuery } from 'react-responsive'
 import moment from 'moment'
 
 import likeIcon from '../like-icon.png'; 
+import binIcon from '../bin-icon.svg'; 
 import { colors, fontSize, device } from '../styles'
 
 
-function Comment({ author, date, content, likesCount }) {
+function Comment({ author, date, content, likesCount, currentUser }) {
     const isTablet = useMediaQuery({ query: `(max-width: ${device.tablet})` })
 
     const [isLiked, setIsLiked] = useState(false)
-
+    const [isRemoved, setIsRemoved] = useState(false)
+    const [isRemovedAnimation, setIsRemovedAnimation] = useState(false)
+    
     const styles = {
         container: {
             border: '1px solid black',
             borderRadius: '5px',
             padding: '10px',
             marginTop:  '30px',
+            transform: (isRemovedAnimation ? 'scaleY(0)' : 'scaleY(1)'),
+            transition: 'all .4s ease-in-out',
+            display: (isRemoved && 'none'),
         },
         metaContainer: {
             display: 'grid',
@@ -67,11 +73,24 @@ function Comment({ author, date, content, likesCount }) {
             fontWeight: 'bold',
             cursor: 'pointer',
         },
+        binIcon: {
+            height: '20px',
+            width: '20px',
+            display: 'inline',
+            cursor: 'pointer',
+            transform: (isRemoved ? 'scale(1.75)' : 'scale(1)'),
+            transition: 'all .1s ease-in-out',
+        }
     }
 
     const handleLikeClick = () => {
         setIsLiked(true)
         setTimeout(() => {setIsLiked(false)}, 1000);
+    }
+
+    const handleDeleteClick = () => {
+        setIsRemovedAnimation(true)
+        setTimeout(() => {setIsRemoved(true)}, 1000);
     }
 
     return (
@@ -85,13 +104,23 @@ function Comment({ author, date, content, likesCount }) {
                 <div className="comment-actions-like" style={styles.like}>
                     <img 
                         src={likeIcon}
-                        alt="LikeIcon"
+                        alt="like"
                         style={styles.likeIcon}
                         onClick={() => handleLikeClick()}
                     />
                     <span style={styles.likeCounter}>{likesCount ? likesCount : 0}</span>
                 </div>
-                <div className="comment-actions-reply" style={styles.reply}>reply</div>
+                <div className="comment-actions-reply" style={styles.reply}>
+                    {author === currentUser && <span className="comment-actions-delete" style={styles.delete}>
+                        <img 
+                            src={binIcon}
+                            alt="delete"
+                            style={styles.binIcon}
+                            onClick={() => handleDeleteClick()}
+                        />
+                    </span>}
+                    <span className="comment-actions-reply" style={styles.reply}>reply</span>
+                </div>
             </div>
         </div>
     );
